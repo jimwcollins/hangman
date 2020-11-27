@@ -13,6 +13,7 @@ class App extends React.Component {
     lettersToGuess: 7,
     attempts: 10,
   };
+
   handleGuess = (char) => {
     const result = this.state.correctPhrase.filter((letter) => {
       console.log(letter, char);
@@ -43,15 +44,24 @@ class App extends React.Component {
     });
   };
 
+  resetGame = () => {
+    this.setState({
+      correctPhrase: ['H', 'A', 'N', 'G', 'M', 'A', 'N'],
+      guesses: [],
+      lettersToGuess: 7,
+      attempts: 10,
+    });
+  };
+
   render() {
     return (
       <div className="App">
         <Header />
         {this.state.lettersToGuess === 0 || this.state.attempts === 0 ? (
           this.state.lettersToGuess === 0 ? (
-            <Result win="true" />
+            <Result win="true" reset={this.resetGame} />
           ) : (
-            <Result win="false" />
+            <Result win="false" reset={this.resetGame} />
           )
         ) : (
           <div>
