@@ -5,13 +5,14 @@ import Counter from './Counter';
 import Phrase from './Phrase';
 import AlphabetSelector from './AlphabetSelector';
 import Result from './Result';
+import Hangman from './Hangman';
 
 class App extends React.Component {
   state = {
     correctPhrase: ['H', 'A', 'N', 'G', 'M', 'A', 'N'],
     guesses: [],
     lettersToGuess: 7,
-    attempts: 10
+    wrongGuesses: 0
   };
 
   handleGuess = (char) => {
@@ -25,10 +26,11 @@ class App extends React.Component {
       this.handleCorrectLetter(result);
     }
   };
+
   handleIncorrectLetter = () => {
     this.setState((currentState) => {
       const newState = {
-        attempts: currentState.attempts - 1
+        wrongGuesses: currentState.wrongGuesses + 1
       };
       return newState;
     });
@@ -49,7 +51,7 @@ class App extends React.Component {
       correctPhrase: ['H', 'A', 'N', 'G', 'M', 'A', 'N'],
       guesses: [],
       lettersToGuess: 7,
-      attempts: 10
+      wrongGuesses: 0
     });
   };
 
@@ -57,12 +59,13 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
-        <Counter attempts={this.state.attempts} />
+        <Hangman />
+        <Counter wrongGuesses={this.state.wrongGuesses} />
         <Phrase
           correctPhrase={this.state.correctPhrase}
           guesses={this.state.guesses}
         />
-        {this.state.lettersToGuess === 0 || this.state.attempts === 0 ? (
+        {this.state.lettersToGuess === 0 || this.state.wrongGuesses === 10 ? (
           this.state.lettersToGuess === 0 ? (
             <Result win="true" reset={this.resetGame} />
           ) : (

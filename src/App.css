@@ -6,6 +6,12 @@
   box-sizing: inherit;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -13,7 +19,7 @@
   height: 100vh;
   width: 100%;
   padding: 5rem;
-  background-image: url('../src/Noose.jpeg');
+  background-image: url('../src/NooseGallows.jpeg');
 }
 
 .App {
@@ -24,6 +30,7 @@
   height: 50rem;
   width: 40rem;
   border-radius: 2rem;
+  padding: 2rem;
 }
 
 .game_area {
