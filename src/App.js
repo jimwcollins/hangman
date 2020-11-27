@@ -11,7 +11,7 @@ class App extends React.Component {
     correctPhrase: ['H', 'A', 'N', 'G', 'M', 'A', 'N'],
     guesses: [],
     lettersToGuess: 7,
-    attempts: 10,
+    attempts: 10
   };
 
   handleGuess = (char) => {
@@ -28,7 +28,7 @@ class App extends React.Component {
   handleIncorrectLetter = () => {
     this.setState((currentState) => {
       const newState = {
-        attempts: currentState.attempts - 1,
+        attempts: currentState.attempts - 1
       };
       return newState;
     });
@@ -38,7 +38,7 @@ class App extends React.Component {
     this.setState((currentState) => {
       const newState = {
         guesses: [...currentState.guesses, lettersGuessed[0]],
-        lettersToGuess: currentState.lettersToGuess - lettersGuessed.length,
+        lettersToGuess: currentState.lettersToGuess - lettersGuessed.length
       };
       return newState;
     });
@@ -49,7 +49,7 @@ class App extends React.Component {
       correctPhrase: ['H', 'A', 'N', 'G', 'M', 'A', 'N'],
       guesses: [],
       lettersToGuess: 7,
-      attempts: 10,
+      attempts: 10
     });
   };
 
@@ -57,6 +57,11 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header />
+        <Counter attempts={this.state.attempts} />
+        <Phrase
+          correctPhrase={this.state.correctPhrase}
+          guesses={this.state.guesses}
+        />
         {this.state.lettersToGuess === 0 || this.state.attempts === 0 ? (
           this.state.lettersToGuess === 0 ? (
             <Result win="true" reset={this.resetGame} />
@@ -64,12 +69,7 @@ class App extends React.Component {
             <Result win="false" reset={this.resetGame} />
           )
         ) : (
-          <div>
-            <Counter attempts={this.state.attempts} />
-            <Phrase
-              correctPhrase={this.state.correctPhrase}
-              guesses={this.state.guesses}
-            />
+          <div className="game_area">
             <AlphabetSelector handleGuess={this.handleGuess} />
           </div>
         )}
