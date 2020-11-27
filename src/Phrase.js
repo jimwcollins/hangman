@@ -2,7 +2,7 @@ const Phrase = (props) => {
   return (
     <div>
       {props.correctPhrase.map((letter) => {
-        return <span> _ </span>;
+        return props.guesses.includes(letter) ? letter : ' _ ';
       })}
     </div>
   );
