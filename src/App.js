@@ -4,6 +4,7 @@ import Header from './Header';
 import Counter from './Counter';
 import Phrase from './Phrase';
 import AlphabetSelector from './AlphabetSelector';
+import Result from './Result';
 
 class App extends React.Component {
   state = {
@@ -20,45 +21,48 @@ class App extends React.Component {
     if (result.length === 0) {
       this.handleIncorrectLetter();
     } else {
-      this.handleCorrectLetter(result.length);
+      this.handleCorrectLetter(result);
     }
   };
   handleIncorrectLetter = () => {
-    if (this.state.attempts === 0) {
-      //new component for results/game over!
-      console.log('Game Over!');
-    } else {
-      this.setState((currentState) => {
-        const newState = {
-          attempts: currentState.attempts - 1,
-        };
-        return newState;
-      });
-    }
+    this.setState((currentState) => {
+      const newState = {
+        attempts: currentState.attempts - 1,
+      };
+      return newState;
+    });
   };
 
   handleCorrectLetter = (lettersGuessed) => {
     this.setState((currentState) => {
       const newState = {
-        lettersToGuess: currentState.lettersToGuess - lettersGuessed,
+        guesses: [...currentState.guesses, lettersGuessed[0]],
+        lettersToGuess: currentState.lettersToGuess - lettersGuessed.length,
       };
       return newState;
     });
-    if (this.state.lettersToGuess === 0) {
-      console.log("You've Won");
-    }
   };
 
   render() {
     return (
       <div className="App">
         <Header />
-        <Counter attempts={this.state.attempts} />
-        <Phrase
-          correctPhrase={this.state.correctPhrase}
-          guesses={this.state.guesses}
-        />
-        <AlphabetSelector handleGuess={this.handleGuess} />
+        {this.state.lettersToGuess === 0 || this.state.attempts === 0 ? (
+          this.state.lettersToGuess === 0 ? (
+            <Result win="true" />
+          ) : (
+            <Result win="false" />
+          )
+        ) : (
+          <div>
+            <Counter attempts={this.state.attempts} />
+            <Phrase
+              correctPhrase={this.state.correctPhrase}
+              guesses={this.state.guesses}
+            />
+            <AlphabetSelector handleGuess={this.handleGuess} />
+          </div>
+        )}
       </div>
     );
   }
