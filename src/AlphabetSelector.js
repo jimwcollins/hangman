@@ -1,7 +1,7 @@
 import React from 'react';
 
 class AlphabetSelector extends React.Component {
-  state = { alphabet: 'abcdefghijklmnopqrstuvwxyz' };
+  state = { alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ' };
 
   render() {
     return (

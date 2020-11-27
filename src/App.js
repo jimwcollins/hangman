@@ -8,23 +8,45 @@ import AlphabetSelector from './AlphabetSelector';
 class App extends React.Component {
   state = {
     correctPhrase: ['H', 'A', 'N', 'G', 'M', 'A', 'N'],
-    guesses: ['H', 'M'],
+    guesses: [],
     lettersToGuess: 7,
     attempts: 10,
   };
   handleGuess = (char) => {
-    //btn press A
-    //check if A is in the correct phrase
-    //if A is in correct phrase, return true
-    this.handleIncorrectLetter();
+    const result = this.state.correctPhrase.filter((letter) => {
+      console.log(letter, char);
+      return letter === char;
+    });
+    if (result.length === 0) {
+      this.handleIncorrectLetter();
+    } else {
+      this.handleCorrectLetter(result.length);
+    }
   };
   handleIncorrectLetter = () => {
+    if (this.state.attempts === 0) {
+      //new component for results/game over!
+      console.log('Game Over!');
+    } else {
+      this.setState((currentState) => {
+        const newState = {
+          attempts: currentState.attempts - 1,
+        };
+        return newState;
+      });
+    }
+  };
+
+  handleCorrectLetter = (lettersGuessed) => {
     this.setState((currentState) => {
       const newState = {
-        attempts: currentState.attempts - 1,
+        lettersToGuess: currentState.lettersToGuess - lettersGuessed,
       };
       return newState;
     });
+    if (this.state.lettersToGuess === 0) {
+      console.log("You've Won");
+    }
   };
 
   render() {
