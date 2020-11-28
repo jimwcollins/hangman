@@ -12,42 +12,73 @@ body {
   align-items: center;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
+html {
+  box-sizing: border-box;
+
+  font-size: 62.5%;
+}
+
+.root {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(10rem, 1fr)
+    [app-start] minmax(min-content, 110rem) [app-end]
+    minmax(10rem, 1fr) [full-end];
   align-items: center;
+
   height: 100vh;
   width: 100%;
-  padding: 5rem;
   background-image: url('../src/NooseGallows.jpeg');
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  grid-column: app-start / app-end;
+
+  display: grid;
+  grid-template-columns:
+    [app-full-start] minmax(5rem, 1fr)
+    [hang-start] 40rem
+    [hang-end game-start] 40rem [game-end]
+    minmax(5rem, 1fr) [app-full-end];
+  grid-template-rows: repeat(2, min-content);
+  column-gap: 2rem;
+  justify-items: center;
+
+  margin: 10vh 0;
+
   background-color: whitesmoke;
-  height: 50rem;
-  width: 40rem;
   border-radius: 2rem;
   padding: 2rem;
 }
 
-.game_area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+header {
+  grid-column: app-full-start / app-full-end;
+  margin-bottom: 3rem;
 }
 
 h1 {
+  font-size: 4rem;
   text-transform: uppercase;
   letter-spacing: 1rem;
   margin: 2rem;
 }
 
+.hangman {
+  grid-column: hang-start / hang-end;
+}
+
+.game-area {
+  grid-column: game-start / game-end;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10rem;
+}
+
 .phrase__letter {
-  font-size: 3rem;
+  font-size: 6rem;
 }
 
 .keyboard {
@@ -56,8 +87,6 @@ h1 {
   justify-content: center;
   align-content: space-between;
   width: 80%;
-  height: 5.5rem;
-  margin-top: 2rem;
 }
 
 .keyboard__btn {

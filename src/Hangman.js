@@ -6,13 +6,11 @@ class Hangman extends Component {
     this.canvasRef = React.createRef();
   }
 
-  state = {
-    attempt: 0
-  };
-
   render() {
+    console.log('rendering');
+
     return (
-      <div>
+      <div className="hangman">
         <canvas
           ref={this.canvasRef}
           id="hangman"
@@ -24,14 +22,31 @@ class Hangman extends Component {
   }
 
   componentDidMount() {
+    this.drawHangman(this.props.drawTo);
+  }
+
+  componentDidUpdate() {
+    this.drawHangman(this.props.drawTo);
+  }
+
+  drawHangman = (drawTo) => {
+    console.log('Game Status', this.props.gameStatus);
+    console.log('Drawing:', drawTo);
     const canvas = this.canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.strokeStyle = 'black';
     ctx.lineWidth = 15;
 
+    // Define each stage of the hangman as function
+    const reset = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.beginPath();
+    };
+
     const drawBase = () => {
       ctx.moveTo(350, 400);
       ctx.lineTo(10, 400);
+      ctx.stroke();
     };
 
     const drawUpright = () => {
@@ -85,7 +100,10 @@ class Hangman extends Component {
       ctx.stroke();
     };
 
+    // Place draw funcs in array then execute function
+    // depending on how many wrong guesses we have
     const hangman = [
+      reset,
       drawBase,
       drawUpright,
       drawBeam,
@@ -98,10 +116,9 @@ class Hangman extends Component {
       drawArm2
     ];
 
-    hangman.forEach((drawFunc) => {
-      drawFunc();
-    });
-  }
+    if (this.props.gameStatus === 'new') hangman.forEach((func) => func());
+    else hangman[drawTo]();
+  };
 }
 
 export default Hangman;
