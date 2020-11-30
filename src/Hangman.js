@@ -34,7 +34,7 @@ class Hangman extends Component {
     console.log('Drawing:', drawTo);
     const canvas = this.canvasRef.current;
     const ctx = canvas.getContext('2d');
-    ctx.strokeStyle = 'black';
+    ctx.strokeStyle = 'rgb(123, 17, 17)';
     ctx.lineWidth = 15;
 
     // Define each stage of the hangman as function

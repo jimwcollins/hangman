@@ -34,12 +34,14 @@ class App extends React.Component {
         />
         <div className="game-area">
           {this.state.gameStatus === 'new' ? (
-            <div>
-              <p>New Game</p>
-              <button onClick={this.newGame}>New Game</button>
+            <div className="new-game">
+              <h2>Want to play a game?</h2>
+              <button className="new-game__btn" onClick={this.newGame}>
+                New Game
+              </button>
             </div>
           ) : (
-            <div className="game-area">
+            <div className="game">
               <Counter wrongGuesses={this.state.wrongGuesses} />
               <Phrase
                 correctPhrase={this.state.correctPhrase}
