@@ -35,7 +35,7 @@ class Hangman extends Component {
     const canvas = this.canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.strokeStyle = 'rgb(123, 17, 17)';
-    ctx.lineWidth = 15;
+    ctx.lineWidth = 10;
 
     // Define each stage of the hangman as function
     const reset = () => {
