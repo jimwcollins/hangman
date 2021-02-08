@@ -13,9 +13,9 @@ body {
   --font-text: 'Roboto', sans-serif;
   --btn-cursor: url('../src/icons/cursor.cur'), auto;
 
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; */
 }
 
 html {
@@ -28,10 +28,11 @@ html {
 .app {
   display: grid;
   grid-template-columns:
-    [full-start] minmax(10rem, 1fr)
-    [app-start] minmax(min-content, 110rem) [app-end]
-    minmax(10rem, 1fr) [full-end];
+    minmax(10rem, 1fr)
+    minmax(min-content, 110rem)
+    minmax(10rem, 1fr);
   grid-template-rows: repeat(2, min-content);
+  grid-template-areas: '. header .' '. app .';
   align-items: center;
 
   height: 100vh;
@@ -41,21 +42,18 @@ html {
 }
 
 header {
-  grid-column: app-start / app-end;
+  grid-area: header;
   margin-bottom: 3rem;
 }
 
 .game {
-  grid-column: app-start / app-end;
+  grid-area: app;
 
   display: grid;
-  grid-template-columns:
-    [hang-start] 30rem
-    [hang-end game-start] 50rem [game-end];
+  grid-template-columns: 40% 60%;
+  grid-template-areas: 'hangman control';
   column-gap: 5rem;
   justify-items: center;
-
-  margin: 10vh 0;
 
   border-radius: 2rem;
   padding: 2rem;
@@ -85,11 +83,11 @@ h2 {
 }
 
 .hangman {
-  grid-column: hang-start / hang-end;
+  grid-area: hangman;
 }
 
-.game-area {
-  grid-column: game-start / game-end;
+.control {
+  grid-area: control;
 
   display: flex;
   flex-direction: column;
@@ -111,14 +109,6 @@ h2 {
   border: none;
   border-radius: 1rem;
   cursor: var(--btn-cursor);
-}
-
-.game {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 10rem;
 }
 
 .phrase__letter {

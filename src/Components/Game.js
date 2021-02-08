@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 
 import Hangman from './Hangman';
 import Counter from './Counter';
@@ -6,107 +6,112 @@ import Phrase from './Phrase';
 import AlphabetSelector from './AlphabetSelector';
 import Result from './Result';
 
-class Game extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      words: ['NORTHCODERS'],
-      correctPhrase: [],
-      guesses: [],
-      lettersToGuess: 0,
-      wrongGuesses: 0,
-      maxErrors: 10,
-      gameStatus: 'new'
-    };
-    this.baseState = this.state;
+// Use a reducer to manage our game state
+const initialGameState = {
+  guesses: [],
+  lettersToGuess: 0,
+  wrongGuesses: 0,
+  gameStatus: 'new',
+};
+
+const gameReducer = (currentGameState, action) => {
+  switch (action.type) {
+    case 'NEW':
+      return {
+        ...currentGameState,
+        lettersToGuess: action.lettersToGuess,
+        gameStatus: 'running',
+      };
+
+    case 'CORRECT_GUESS':
+      const newLettersToGuess =
+        currentGameState.lettersToGuess - action.correctLetters.length;
+
+      return {
+        ...currentGameState,
+        guesses: [...currentGameState.guesses, action.correctLetters[0]],
+        lettersToGuess: newLettersToGuess,
+        gameStatus: newLettersToGuess === 0 ? 'won' : 'running',
+      };
+
+    case 'WRONG_GUESS':
+      const newWrongGuesses = currentGameState.wrongGuesses + 1;
+
+      return {
+        ...currentGameState,
+        wrongGuesses: newWrongGuesses,
+        gameStatus: newWrongGuesses === action.maxErrors ? 'lost' : 'running',
+      };
+
+    case 'RESET':
+      return initialGameState;
+
+    default:
+      throw new Error('Error updating game state');
   }
+};
 
-  render() {
-    return (
-      <div>
-        <Hangman
-          gameStatus={this.state.gameStatus}
-          drawTo={this.state.wrongGuesses}
-        />
-        <div className="game-area">
-          <div className="game">
-            <Counter wrongGuesses={this.state.wrongGuesses} />
-            <Phrase
-              correctPhrase={this.state.correctPhrase}
-              guesses={this.state.guesses}
-            />
-            {this.state.gameStatus !== 'running' ? (
-              this.state.gameStatus === 'won' ? (
-                <Result win="true" reset={this.resetGame} />
-              ) : (
-                <Result win="false" reset={this.resetGame} />
-              )
-            ) : (
-              <AlphabetSelector handleGuess={this.handleGuess} />
-            )}
-          </div>
-        </div>
-      </div>
-    );
-  }
+const Game = () => {
+  const [wordBank] = useState(['NORTHCODERS', 'HANGMAN', 'EASY']);
+  const [maxErrors] = useState(10);
+  const [currentWord, setCurrentWord] = useState([]);
+  const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
 
-  componentDidUpdate = () => {
-    // At the start of the game, grab a new word at random
-    // Split into array and slot into our current correctPhrase
-    const randomIndex = Math.floor(Math.random() * this.state.words.length);
-    const newWord = this.state.words[randomIndex].split('');
-    console.log('Fetching word:', randomIndex, ' ', newWord);
+  useEffect(() => {
+    if (gameState.gameStatus !== 'running') {
+      // At the start of the game, grab a new word at random
+      // Split into array and slot into our current currentWord
+      const randomIndex = Math.floor(Math.random() * wordBank.length);
+      const newWord = wordBank[randomIndex].split('');
+      setCurrentWord(newWord);
 
-    this.setState({
-      correctPhrase: newWord,
-      lettersToGuess: newWord.length,
-      gameStatus: 'running'
-    });
-  };
+      // Now use our reducer to update our game state
+      dispatchGame({
+        type: 'NEW',
+        lettersToGuess: newWord.length,
+      });
+    }
+  }, [wordBank, gameState.gameStatus]);
 
-  handleGuess = (char) => {
-    const result = this.state.correctPhrase.filter((letter) => {
+  const handleGuess = (char) => {
+    const correctLetters = currentWord.filter((letter) => {
       return letter === char;
     });
-    if (result.length === 0) {
-      this.handleIncorrectLetter();
+
+    if (correctLetters.length === 0) {
+      dispatchGame({ type: 'WRONG_GUESS', maxErrors });
     } else {
-      this.handleCorrectLetter(result);
+      dispatchGame({ type: 'CORRECT_GUESS', correctLetters });
     }
   };
 
-  handleIncorrectLetter = () => {
-    this.setState((currentState) => {
-      const wrongGuessesTotal = currentState.wrongGuesses + 1;
-      const gameStatus =
-        wrongGuessesTotal === this.state.maxErrors ? 'lost' : 'running';
-
-      const newState = {
-        wrongGuesses: wrongGuessesTotal,
-        gameStatus
-      };
-      return newState;
-    });
+  const resetGame = () => {
+    dispatchGame({ type: 'RESET' });
   };
 
-  handleCorrectLetter = (lettersGuessed) => {
-    this.setState((currentState) => {
-      const newLettersToGuess =
-        currentState.lettersToGuess - lettersGuessed.length;
-      const gameStatus = newLettersToGuess === 0 ? 'won' : 'running';
-
-      const newState = {
-        guesses: [...currentState.guesses, lettersGuessed[0]],
-        lettersToGuess: newLettersToGuess,
-        gameStatus
-      };
-      return newState;
-    });
-  };
-
-  resetGame = () => {
-    this.setState(this.baseState);
-  };
-}
+  return (
+    <>
+      <Hangman
+        gameStatus={gameState.gameStatus}
+        drawTo={gameState.wrongGuesses}
+      />
+      <div className="game-area">
+        <div className="game">
+          <Counter wrongGuesses={gameState.wrongGuesses} />
+          <Phrase currentWord={currentWord} guesses={gameState.guesses} />
+          {gameState.gameStatus !== 'running' ? (
+            gameState.gameStatus === 'won' ? (
+              <Result win="true" reset={resetGame} />
+            ) : (
+              <Result win="false" reset={resetGame} />
+            )
+          ) : (
+            <AlphabetSelector handleGuess={handleGuess} />
+          )}
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default Game;

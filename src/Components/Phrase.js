@@ -1,10 +1,10 @@
-const Phrase = (props) => {
+const Phrase = ({ currentWord, guesses }) => {
   return (
     <div>
-      {props.correctPhrase.map((letter) => {
+      {currentWord.map((letter) => {
         return (
           <span className="phrase__letter">
-            {props.guesses.includes(letter) ? letter : ' _ '}
+            {guesses.includes(letter) ? letter : ' _ '}
           </span>
         );
       })}

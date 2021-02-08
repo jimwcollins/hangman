@@ -5,9 +5,9 @@ import { Link } from '@reach/router';
 
 const Home = () => {
   return (
-    <div>
+    <>
       <Hangman gameStatus="new" />
-      <div className="game-area">
+      <div className="control">
         <div className="new-game">
           <h2>Want to play a game?</h2>
           <button className="btn">
@@ -15,7 +15,7 @@ const Home = () => {
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
