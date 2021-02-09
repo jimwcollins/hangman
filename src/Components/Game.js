@@ -58,7 +58,8 @@ const Game = () => {
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
 
   useEffect(() => {
-    if (gameState.gameStatus !== 'running') {
+    if (gameState.gameStatus === 'new') {
+      console.log('Starting new game');
       // At the start of the game, grab a new word at random
       // Split into array and slot into our current currentWord
       const randomIndex = Math.floor(Math.random() * wordBank.length);

@@ -7,8 +7,6 @@ class Hangman extends Component {
   }
 
   render() {
-    console.log('rendering');
-
     return (
       <div className="hangman">
         <canvas
@@ -30,8 +28,6 @@ class Hangman extends Component {
   }
 
   drawHangman = (drawTo) => {
-    console.log('Game Status', this.props.gameStatus);
-    console.log('Drawing:', drawTo);
     const canvas = this.canvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.strokeStyle = 'rgb(123, 17, 17)';
@@ -113,7 +109,7 @@ class Hangman extends Component {
       drawLeg1,
       drawLeg2,
       drawArm1,
-      drawArm2
+      drawArm2,
     ];
 
     if (this.props.gameStatus === 'new') hangman.forEach((func) => func());
