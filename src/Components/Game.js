@@ -95,20 +95,18 @@ const Game = () => {
         gameStatus={gameState.gameStatus}
         drawTo={gameState.wrongGuesses}
       />
-      <div className="game-area">
-        <div className="game">
-          <Counter wrongGuesses={gameState.wrongGuesses} />
-          <Phrase currentWord={currentWord} guesses={gameState.guesses} />
-          {gameState.gameStatus !== 'running' ? (
-            gameState.gameStatus === 'won' ? (
-              <Result win="true" reset={resetGame} />
-            ) : (
-              <Result win="false" reset={resetGame} />
-            )
+      <div className="control">
+        <Counter wrongGuesses={gameState.wrongGuesses} />
+        <Phrase currentWord={currentWord} guesses={gameState.guesses} />
+        {gameState.gameStatus !== 'running' ? (
+          gameState.gameStatus === 'won' ? (
+            <Result win="true" reset={resetGame} />
           ) : (
-            <AlphabetSelector handleGuess={handleGuess} />
-          )}
-        </div>
+            <Result win="false" reset={resetGame} />
+          )
+        ) : (
+          <AlphabetSelector handleGuess={handleGuess} />
+        )}
       </div>
     </>
   );
