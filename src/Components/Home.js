@@ -1,14 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Hangman from './Hangman';
 import { Link } from '@reach/router';
-import LineTest from './LineTest';
 
 const Home = () => {
   return (
     <>
-      {/* <Hangman gameStatus="new" /> */}
-      <LineTest />
+      <Hangman drawTo="new" />
       <div className="control">
         <div className="new-game">
           <h2>Want to play a game?</h2>
