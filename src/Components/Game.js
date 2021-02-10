@@ -3,7 +3,7 @@ import React, { useState, useEffect, useReducer } from 'react';
 import Hangman from './Hangman';
 import Counter from './Counter';
 import Phrase from './Phrase';
-import AlphabetSelector from './AlphabetSelector';
+import Keyboard from './Keyboard';
 import Result from './Result';
 
 const phraseBank = ['NORTHCODERS', 'HANGMAN', 'JAMES COLLINS'];
@@ -109,7 +109,7 @@ const Game = ({ canvasSize }) => {
             <Result win="false" reset={resetGame} />
           )
         ) : (
-          <AlphabetSelector handleGuess={handleGuess} />
+          <Keyboard handleGuess={handleGuess} />
         )}
       </div>
     </>
