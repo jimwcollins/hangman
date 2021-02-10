@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import AnimCanvas from './AnimCanvas';
 
 const drawStages = [
+  {}, // New Game
   { moveTo: [350, 400], line: [-340, 0] }, // Base
   { moveTo: [60, 400], line: [0, -390] }, // Upright
   { moveTo: [56, 10], line: [198, 0] }, // Beam
@@ -14,21 +15,18 @@ const drawStages = [
   { moveTo: [250, 150], line: [50, 75] }, // Arm 2
 ];
 
-const Hangman = ({ drawTo }) => {
-  const [drawStage, setDrawStage] = useState(0);
-
-  // Complete animation for home page
-  useEffect(() => {
-    setTimeout(() => {
-      if (drawStage < drawStages.length - 1)
-        setDrawStage((prevStage) => prevStage + 1);
-    }, 1100);
-  });
-
+const Hangman = ({ drawTo, canvasSize }) => {
   // The draw function draws each stage depending on data from the drawStage array
   // and the current stage, provided by the main game or by the animation useEffect on home page
+  // We pass this to be drawn by our AnimCanvas component
   const draw = (ctx, frame) => {
-    const toDraw = drawStages[drawStage];
+    if (drawTo === 0) {
+      ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
+      ctx.beginPath();
+      return;
+    }
+
+    const toDraw = drawStages[drawTo];
 
     ctx.strokeStyle = 'rgb(123, 17, 17)';
     ctx.lineWidth = 7;
@@ -37,6 +35,8 @@ const Hangman = ({ drawTo }) => {
     if (toDraw.circle) drawCircle(ctx, frame, toDraw);
   };
 
+  // Draw a certain amount of the required line depending on
+  // the frame given to us by the animated canvas
   const drawLine = (ctx, frame, toDraw) => {
     const [moveToX, moveToY] = toDraw.moveTo;
     ctx.moveTo(moveToX, moveToY);
@@ -60,7 +60,7 @@ const Hangman = ({ drawTo }) => {
     ctx.stroke();
   };
 
-  return <AnimCanvas draw={draw} />;
+  return <AnimCanvas draw={draw} canvasSize={canvasSize} />;
 };
 
 export default Hangman;

@@ -6,7 +6,7 @@
 
 import React, { useEffect, useRef } from 'react';
 
-function AnimCanvas({ draw }) {
+function AnimCanvas({ draw, canvasSize }) {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -30,7 +30,11 @@ function AnimCanvas({ draw }) {
   });
 
   return (
-    <canvas ref={canvasRef} id="hangman" width="400" height="500"></canvas>
+    <canvas
+      ref={canvasRef}
+      width={canvasSize.width}
+      height={canvasSize.height}
+    ></canvas>
   );
 }
 

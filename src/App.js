@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import { Router } from '@reach/router';
 
@@ -7,13 +7,15 @@ import Home from './Components/Home';
 import Game from './Components/Game';
 
 const App = () => {
+  const [canvasSize] = useState({ width: 400, height: 500 });
+
   return (
     <div className="app">
       <Header />
 
       <Router className="game">
-        <Home path="/" />
-        <Game path="/game" />
+        <Home path="/" canvasSize={canvasSize} />
+        <Game path="/game" canvasSize={canvasSize} />
       </Router>
     </div>
   );

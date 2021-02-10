@@ -53,7 +53,7 @@ const gameReducer = (currentGameState, action) => {
   }
 };
 
-const Game = () => {
+const Game = ({ canvasSize }) => {
   const [maxErrors] = useState(10);
   const [currentPhrase, setCurrentPhrase] = useState([]);
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
@@ -96,12 +96,9 @@ const Game = () => {
 
   return (
     <>
-      <Hangman
-        gameStatus={gameState.gameStatus}
-        drawTo={gameState.wrongGuesses}
-      />
+      <Hangman drawTo={gameState.wrongGuesses} canvasSize={canvasSize} />
+      {/* <Counter wrongGuesses={gameState.wrongGuesses} /> */}
       <div className="control">
-        <Counter wrongGuesses={gameState.wrongGuesses} />
         <Phrase currentPhrase={currentPhrase} guesses={gameState.guesses} />
         {gameState.gameStatus !== 'running' ? (
           gameState.gameStatus === 'won' ? (
