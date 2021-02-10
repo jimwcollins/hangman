@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import Hangman from './Hangman';
-import { Link } from '@reach/router';
+import Welcome from './Welcome';
+import MainButton from './MainButton';
 
 const Home = ({ canvasSize }) => {
   const [drawStage, setDrawStage] = useState(0);
@@ -19,10 +20,8 @@ const Home = ({ canvasSize }) => {
       <Hangman drawTo={drawStage} canvasSize={canvasSize} className="hangman" />
       <div className="control">
         <div className="new-game">
-          <h2>Want to play a game?</h2>
-          <button className="btn">
-            <Link to="/game">New Game</Link>
-          </button>
+          <Welcome>Want to play a game?</Welcome>
+          <MainButton target="/game">Hell, yeah!</MainButton>
         </div>
       </div>
     </>
