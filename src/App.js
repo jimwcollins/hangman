@@ -7,7 +7,7 @@ import Home from './Components/Home';
 import Game from './Components/Game';
 
 const App = () => {
-  const [canvasSize] = useState({ width: 400, height: 500 });
+  const [canvasSize] = useState({ width: 400, height: 410 });
 
   return (
     <div className="app">

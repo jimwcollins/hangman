@@ -31,7 +31,7 @@ html {
     minmax(10rem, 1fr)
     minmax(min-content, 110rem)
     minmax(10rem, 1fr);
-  grid-template-rows: repeat(2, min-content);
+  grid-template-rows: min-content 55rem;
   grid-template-areas: '. header .' '. app .';
   align-items: center;
 
@@ -50,6 +50,7 @@ header {
   grid-area: app;
 
   display: grid;
+  height: 100%;
   grid-template-columns: 40% 60%;
   grid-template-areas: 'hangman control';
   column-gap: 5rem;
@@ -84,6 +85,10 @@ h2 {
 
 .hangman {
   grid-area: hangman;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .control {
@@ -91,9 +96,8 @@ h2 {
 
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
-  margin-bottom: 10rem;
 }
 
 .new-game {

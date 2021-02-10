@@ -96,8 +96,10 @@ const Game = ({ canvasSize }) => {
 
   return (
     <>
-      <Counter wrongGuesses={gameState.wrongGuesses} />
-      <Hangman drawTo={gameState.wrongGuesses} canvasSize={canvasSize} />
+      <div className="hangman">
+        <Hangman drawTo={gameState.wrongGuesses} canvasSize={canvasSize} />
+        <Counter wrongGuesses={gameState.wrongGuesses} />
+      </div>
       <div className="control">
         <Phrase currentPhrase={currentPhrase} guesses={gameState.guesses} />
         {gameState.gameStatus !== 'running' ? (

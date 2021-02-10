@@ -16,7 +16,7 @@ const Home = ({ canvasSize }) => {
 
   return (
     <>
-      <Hangman drawTo={drawStage} canvasSize={canvasSize} />
+      <Hangman drawTo={drawStage} canvasSize={canvasSize} className="hangman" />
       <div className="control">
         <div className="new-game">
           <h2>Want to play a game?</h2>
