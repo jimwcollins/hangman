@@ -78,7 +78,7 @@ const Game = ({ canvasSize }) => {
       if (spaces.length > 0)
         dispatchGame({ type: 'CORRECT_GUESS', correctLetters: spaces });
     }
-  }, [phraseBank, gameState.gameStatus]);
+  }, [gameState.gameStatus]);
 
   const handleGuess = (char) => {
     const correctLetters = currentPhrase.filter((letter) => letter === char);
@@ -96,8 +96,8 @@ const Game = ({ canvasSize }) => {
 
   return (
     <>
+      <Counter wrongGuesses={gameState.wrongGuesses} />
       <Hangman drawTo={gameState.wrongGuesses} canvasSize={canvasSize} />
-      {/* <Counter wrongGuesses={gameState.wrongGuesses} /> */}
       <div className="control">
         <Phrase currentPhrase={currentPhrase} guesses={gameState.guesses} />
         {gameState.gameStatus !== 'running' ? (
