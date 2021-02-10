@@ -1,120 +1,66 @@
-import React, { Component } from 'react';
+import React from 'react';
+import AnimCanvas from './AnimCanvas';
 
-class Hangman extends Component {
-  constructor(props) {
-    super(props);
-    this.canvasRef = React.createRef();
-  }
+const drawStages = [
+  {}, // New Game
+  { moveTo: [350, 400], line: [-340, 0] }, // Base
+  { moveTo: [60, 400], line: [0, -390] }, // Upright
+  { moveTo: [56, 10], line: [198, 0] }, // Beam
+  { moveTo: [250, 10], line: [0, 50] }, // Noose
+  { moveTo: [250, 60], circle: [250, 90, 30] }, // Head
+  { moveTo: [250, 120], line: [0, 130] }, // Body
+  { moveTo: [250, 250], line: [-50, 75] }, // Leg 1
+  { moveTo: [250, 250], line: [50, 75] }, // Leg 2
+  { moveTo: [250, 150], line: [-50, 75] }, // Arm 1
+  { moveTo: [250, 150], line: [50, 75] }, // Arm 2
+];
 
-  render() {
-    return (
-      <div className="hangman">
-        <canvas
-          ref={this.canvasRef}
-          id="hangman"
-          width="400"
-          height="500"
-        ></canvas>
-      </div>
-    );
-  }
+const Hangman = ({ drawTo, canvasSize }) => {
+  // The draw function draws each stage depending on data from the drawStage array
+  // and the current stage, provided by the main game or by the animation useEffect on home page
+  // We pass this to be drawn by our AnimCanvas component
+  const draw = (ctx, frame) => {
+    if (drawTo === 0) {
+      ctx.clearRect(0, 0, canvasSize.width, canvasSize.height);
+      ctx.beginPath();
+      return;
+    }
 
-  componentDidMount() {
-    this.drawHangman(this.props.drawTo);
-  }
+    const toDraw = drawStages[drawTo];
 
-  componentDidUpdate() {
-    this.drawHangman(this.props.drawTo);
-  }
-
-  drawHangman = (drawTo) => {
-    const canvas = this.canvasRef.current;
-    const ctx = canvas.getContext('2d');
     ctx.strokeStyle = 'rgb(123, 17, 17)';
-    ctx.lineWidth = 10;
+    ctx.lineWidth = 7;
 
-    // Define each stage of the hangman as function
-    const reset = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.beginPath();
-    };
-
-    const drawBase = () => {
-      ctx.moveTo(350, 400);
-      ctx.lineTo(10, 400);
-      ctx.stroke();
-    };
-
-    const drawUpright = () => {
-      ctx.moveTo(60, 400);
-      ctx.lineTo(60, 10);
-      ctx.stroke();
-    };
-
-    const drawBeam = () => {
-      ctx.lineTo(250, 10);
-      ctx.stroke();
-    };
-
-    const drawNoose = () => {
-      ctx.lineTo(250, 60);
-      ctx.stroke();
-    };
-
-    const drawHead = () => {
-      ctx.beginPath();
-      ctx.arc(250, 90, 30, 0, 2 * Math.PI);
-      ctx.stroke();
-    };
-
-    const drawBody = () => {
-      ctx.moveTo(250, 120);
-      ctx.lineTo(250, 250);
-      ctx.stroke();
-    };
-
-    const drawLeg1 = () => {
-      ctx.lineTo(200, 325);
-      ctx.stroke();
-    };
-
-    const drawLeg2 = () => {
-      ctx.moveTo(250, 250);
-      ctx.lineTo(300, 325);
-      ctx.stroke();
-    };
-
-    const drawArm1 = () => {
-      ctx.moveTo(250, 150);
-      ctx.lineTo(200, 225);
-      ctx.stroke();
-    };
-
-    const drawArm2 = () => {
-      ctx.moveTo(250, 150);
-      ctx.lineTo(300, 225);
-      ctx.stroke();
-    };
-
-    // Place draw funcs in array then execute function
-    // depending on how many wrong guesses we have
-    const hangman = [
-      reset,
-      drawBase,
-      drawUpright,
-      drawBeam,
-      drawNoose,
-      drawHead,
-      drawBody,
-      drawLeg1,
-      drawLeg2,
-      drawArm1,
-      drawArm2,
-    ];
-
-    if (this.props.gameStatus === 'new') hangman.forEach((func) => func());
-    else hangman[drawTo]();
+    if (toDraw.line) drawLine(ctx, frame, toDraw);
+    if (toDraw.circle) drawCircle(ctx, frame, toDraw);
   };
-}
+
+  // Draw a certain amount of the required line depending on
+  // the frame given to us by the animated canvas
+  const drawLine = (ctx, frame, toDraw) => {
+    const [moveToX, moveToY] = toDraw.moveTo;
+    ctx.moveTo(moveToX, moveToY);
+
+    const [diffX, diffY] = toDraw.line;
+    const currentX = moveToX + diffX * (frame / 60);
+    const currentY = moveToY + diffY * (frame / 60);
+
+    ctx.lineTo(currentX, currentY);
+    ctx.stroke();
+  };
+
+  const drawCircle = (ctx, frame, toDraw) => {
+    const [centerX, centreY, radius] = toDraw.circle;
+
+    const endAngle = (frame / 30) * Math.PI;
+    console.log('endAngle:', endAngle);
+
+    ctx.beginPath();
+    ctx.arc(centerX, centreY, radius, 0, endAngle);
+    ctx.stroke();
+  };
+
+  return <AnimCanvas draw={draw} canvasSize={canvasSize} />;
+};
 
 export default Hangman;

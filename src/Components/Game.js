@@ -6,6 +6,8 @@ import Phrase from './Phrase';
 import AlphabetSelector from './AlphabetSelector';
 import Result from './Result';
 
+const phraseBank = ['NORTHCODERS', 'HANGMAN', 'JAMES COLLINS'];
+
 // Use a reducer to manage our game state
 const initialGameState = {
   guesses: [],
@@ -51,33 +53,35 @@ const gameReducer = (currentGameState, action) => {
   }
 };
 
-const Game = () => {
-  const [wordBank] = useState(['NORTHCODERS', 'HANGMAN', 'EASY']);
+const Game = ({ canvasSize }) => {
   const [maxErrors] = useState(10);
-  const [currentWord, setCurrentWord] = useState([]);
+  const [currentPhrase, setCurrentPhrase] = useState([]);
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
 
   useEffect(() => {
     if (gameState.gameStatus === 'new') {
-      console.log('Starting new game');
       // At the start of the game, grab a new word at random
-      // Split into array and slot into our current currentWord
-      const randomIndex = Math.floor(Math.random() * wordBank.length);
-      const newWord = wordBank[randomIndex].split('');
-      setCurrentWord(newWord);
+      // Split into array and slot into our current currentPhrase
+      const randomIndex = Math.floor(Math.random() * phraseBank.length);
+      const newPhrase = phraseBank[randomIndex].split('');
+      setCurrentPhrase(newPhrase);
 
       // Now use our reducer to update our game state
       dispatchGame({
         type: 'NEW',
-        lettersToGuess: newWord.length,
+        lettersToGuess: newPhrase.length,
       });
+
+      // Handle spaces
+      const spaces = newPhrase.filter((letter) => letter === ' ');
+
+      if (spaces.length > 0)
+        dispatchGame({ type: 'CORRECT_GUESS', correctLetters: spaces });
     }
-  }, [wordBank, gameState.gameStatus]);
+  }, [gameState.gameStatus]);
 
   const handleGuess = (char) => {
-    const correctLetters = currentWord.filter((letter) => {
-      return letter === char;
-    });
+    const correctLetters = currentPhrase.filter((letter) => letter === char);
 
     if (correctLetters.length === 0) {
       dispatchGame({ type: 'WRONG_GUESS', maxErrors });
@@ -92,13 +96,10 @@ const Game = () => {
 
   return (
     <>
-      <Hangman
-        gameStatus={gameState.gameStatus}
-        drawTo={gameState.wrongGuesses}
-      />
+      <Counter wrongGuesses={gameState.wrongGuesses} />
+      <Hangman drawTo={gameState.wrongGuesses} canvasSize={canvasSize} />
       <div className="control">
-        <Counter wrongGuesses={gameState.wrongGuesses} />
-        <Phrase currentWord={currentWord} guesses={gameState.guesses} />
+        <Phrase currentPhrase={currentPhrase} guesses={gameState.guesses} />
         {gameState.gameStatus !== 'running' ? (
           gameState.gameStatus === 'won' ? (
             <Result win="true" reset={resetGame} />
