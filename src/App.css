@@ -7,6 +7,7 @@
 }
 
 body {
+  /* Variables */
   --color-main: rgb(123, 17, 17);
   --color-text: rgb(238, 230, 230);
   --font-display: 'Jim Nightshade', cursive;
