@@ -20,7 +20,7 @@ const HangmanContainer = styled.div`
 const phraseBank = ['NORTHCODERS', 'HANGMAN', 'JAMES COLLINS'];
 
 const initialGameState = {
-  guesses: [],
+  correctGuesses: [],
   lettersToGuess: 0,
   wrongGuesses: 0,
   gameStatus: 'new',
@@ -42,7 +42,10 @@ const gameReducer = (currentGameState, action) => {
 
       return {
         ...currentGameState,
-        guesses: [...currentGameState.guesses, action.correctLetters[0]],
+        correctGuesses: [
+          ...currentGameState.correctGuesses,
+          action.correctLetters[0],
+        ],
         lettersToGuess: newLettersToGuess,
         gameStatus: newLettersToGuess === 0 ? 'won' : 'running',
       };
@@ -113,7 +116,10 @@ const Game = ({ canvasSize }) => {
         <Counter wrongGuesses={gameState.wrongGuesses} />
       </HangmanContainer>
       <div className="control">
-        <Phrase currentPhrase={currentPhrase} guesses={gameState.guesses} />
+        <Phrase
+          newPhrase={currentPhrase}
+          correctGuesses={gameState.correctGuesses}
+        />
         {gameState.gameStatus !== 'running' ? (
           <Result
             win={gameState.gameStatus === 'won' ? 'true' : 'false'}

@@ -51,9 +51,7 @@ const Hangman = ({ drawTo, canvasSize }) => {
 
   const drawCircle = (ctx, frame, toDraw) => {
     const [centerX, centreY, radius] = toDraw.circle;
-
     const endAngle = (frame / 30) * Math.PI;
-    console.log('endAngle:', endAngle);
 
     ctx.beginPath();
     ctx.arc(centerX, centreY, radius, 0, endAngle);

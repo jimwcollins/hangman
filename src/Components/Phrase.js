@@ -1,37 +1,84 @@
+import React, { useState, useEffect } from 'react';
+import { Transition } from 'react-transition-group';
 import styled from 'styled-components';
 
+// Styles
 const PhraseContainer = styled.div`
+  display: flex;
   margin-top: 7rem;
 `;
 
-const PhraseLetter = styled.span`
+const LetterBox = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const PhraseLetter = styled.div`
   font-family: var(--font-display);
   font-size: 6.5rem;
   color: var(--color-text);
-  margin: 0 0.5rem;
+  letter-spacing: 2rem;
+
+  // Animation on letter guess
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+
+  transform: ${({ state }) =>
+    state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};
+
+  transition: all 1s;
 `;
 
-const PhraseSpace = styled.span`
-  position: relative;
+const PhraseSpace = styled.div`
   font-family: var(--font-text);
   font-size: 6.5rem;
   color: var(--color-main);
-  margin: 0 0.75rem;
-  top: 0.5rem;
+  letter-spacing: 2rem;
+  transform: translateY(-8rem);
+
+  // Animation on letter guess
+  opacity: ${({ state }) => (state === 'exited' ? 0 : 1)};
+  transition: opacity 1s;
 `;
 
-const Phrase = ({ currentPhrase, guesses }) => {
+// Component
+const Phrase = ({ newPhrase, correctGuesses }) => {
+  const [phraseState, setPhraseState] = useState({});
+
+  // Populate an object with all letters in word and save to state
+  // Each letters has initial value of false (has not been guessed)
+  useEffect(() => {
+    const phraseObj = newPhrase.reduce((phrase, letter) => {
+      phrase[letter] = false;
+      return phrase;
+    }, {});
+
+    setPhraseState(phraseObj);
+  }, [newPhrase]);
+
+  // Whenever a correct guess is made, change the value of that letter
+  // in the phrase state to true
+  useEffect(() => {
+    if (correctGuesses.length > 0) {
+      const newGuess = correctGuesses[correctGuesses.length - 1];
+      console.log('new guess made', newGuess);
+      setPhraseState((phraseState) => ({ ...phraseState, [newGuess]: true }));
+    }
+  }, [correctGuesses]);
+
+  // Return both letter and the gap - one hidden, one shown.
+  // Transition the hide/show for each depending on values in phrase state
   return (
     <PhraseContainer>
-      {currentPhrase.map((letter) => {
+      {newPhrase.map((letter) => {
         return (
-          <>
-            {guesses.includes(letter) ? (
-              <PhraseLetter>{letter}</PhraseLetter>
-            ) : (
-              <PhraseSpace>_</PhraseSpace>
-            )}
-          </>
+          <LetterBox>
+            <Transition in={phraseState[letter]} timeout={200}>
+              {(state) => <PhraseLetter state={state}>{letter}</PhraseLetter>}
+            </Transition>
+            <Transition in={!phraseState[letter]} timeout={200}>
+              {(state) => <PhraseSpace state={state}>_</PhraseSpace>}
+            </Transition>
+          </LetterBox>
         );
       })}
     </PhraseContainer>
