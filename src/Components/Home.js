@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 
 import Hangman from './Hangman';
-import { Link } from '@reach/router';
+import Welcome from './Welcome';
+import MainButton from './MainButton';
+
+const NewGame = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const Home = ({ canvasSize }) => {
   const [drawStage, setDrawStage] = useState(0);
@@ -16,14 +25,12 @@ const Home = ({ canvasSize }) => {
 
   return (
     <>
-      <Hangman drawTo={drawStage} canvasSize={canvasSize} className="hangman" />
+      <Hangman drawTo={drawStage} canvasSize={canvasSize} />
       <div className="control">
-        <div className="new-game">
-          <h2>Want to play a game?</h2>
-          <button className="btn">
-            <Link to="/game">New Game</Link>
-          </button>
-        </div>
+        <NewGame>
+          <Welcome>Want to play a game?</Welcome>
+          <MainButton target="/game" text="Hell, yeah!" />
+        </NewGame>
       </div>
     </>
   );

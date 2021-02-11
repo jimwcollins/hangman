@@ -1,6 +1,15 @@
+import styled from 'styled-components';
+
+const CounterText = styled.p`
+  font-size: 1.5rem;
+  color: white;
+`;
+
 const Counter = (props) => {
   return (
-    <p className="counter">Guesses remaining: {10 - props.wrongGuesses}</p>
+    <CounterText className="counter">
+      Guesses remaining: {10 - props.wrongGuesses}
+    </CounterText>
   );
 };
 
