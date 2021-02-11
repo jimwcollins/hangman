@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Link } from '@reach/router';
 
 const Button = styled.button`
   height: 5rem;
@@ -14,17 +13,10 @@ const Button = styled.button`
   color: var(--color-text);
 `;
 
-export default function MainButton({ target, onClick, text }) {
+export default function MainButton({ onClick, text, className }) {
   return (
-    <>
-      {target && (
-        <Button>
-          <Link to={target} className="link">
-            {text}
-          </Link>
-        </Button>
-      )}
-      {onClick && <Button onClick={onClick}>{text}</Button>}
-    </>
+    <Button onClick={onClick} className={className}>
+      {text}
+    </Button>
   );
 }

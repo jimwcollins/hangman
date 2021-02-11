@@ -3,14 +3,6 @@ import styled from 'styled-components';
 
 import Hangman from './Hangman';
 import Welcome from './Welcome';
-import MainButton from './MainButton';
-
-const NewGame = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`;
 
 const Home = ({ canvasSize }) => {
   const [drawStage, setDrawStage] = useState(0);
@@ -27,10 +19,7 @@ const Home = ({ canvasSize }) => {
     <>
       <Hangman drawTo={drawStage} canvasSize={canvasSize} />
       <div className="control">
-        <NewGame>
-          <Welcome>Want to play a game?</Welcome>
-          <MainButton target="/game" text="Hell, yeah!" />
-        </NewGame>
+        <Welcome />
       </div>
     </>
   );
