@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
+import styled from 'styled-components';
 
 import Hangman from './Hangman';
 import Counter from './Counter';
@@ -6,9 +7,18 @@ import Phrase from './Phrase';
 import Keyboard from './Keyboard';
 import Result from './Result';
 
+// Styles
+const HangmanContainer = styled.div`
+  grid-area: hangman;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+// Initial phrases and game state
 const phraseBank = ['NORTHCODERS', 'HANGMAN', 'JAMES COLLINS'];
 
-// Use a reducer to manage our game state
 const initialGameState = {
   guesses: [],
   lettersToGuess: 0,
@@ -16,6 +26,7 @@ const initialGameState = {
   gameStatus: 'new',
 };
 
+// Use a reducer to manage our game state
 const gameReducer = (currentGameState, action) => {
   switch (action.type) {
     case 'NEW':
@@ -53,6 +64,7 @@ const gameReducer = (currentGameState, action) => {
   }
 };
 
+// Component
 const Game = ({ canvasSize }) => {
   const [maxErrors] = useState(10);
   const [currentPhrase, setCurrentPhrase] = useState([]);
@@ -96,18 +108,17 @@ const Game = ({ canvasSize }) => {
 
   return (
     <>
-      <div className="hangman">
+      <HangmanContainer>
         <Hangman drawTo={gameState.wrongGuesses} canvasSize={canvasSize} />
         <Counter wrongGuesses={gameState.wrongGuesses} />
-      </div>
+      </HangmanContainer>
       <div className="control">
         <Phrase currentPhrase={currentPhrase} guesses={gameState.guesses} />
         {gameState.gameStatus !== 'running' ? (
-          gameState.gameStatus === 'won' ? (
-            <Result win="true" reset={resetGame} />
-          ) : (
-            <Result win="false" reset={resetGame} />
-          )
+          <Result
+            win={gameState.gameStatus === 'won' ? 'true' : 'false'}
+            reset={resetGame}
+          />
         ) : (
           <Keyboard handleGuess={handleGuess} />
         )}

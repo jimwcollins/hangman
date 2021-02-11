@@ -21,6 +21,8 @@ html {
   font-family: var(--font-text);
 }
 
+/* Global page layout styles */
+
 .game {
   grid-area: app;
 
@@ -35,14 +37,6 @@ html {
   padding: 2rem;
 }
 
-.hangman {
-  grid-area: hangman;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .control {
   grid-area: control;
 
@@ -52,15 +46,9 @@ html {
   align-items: center;
 }
 
-.new-game {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+/* Global element styles */
 
-.result {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.link {
+  text-decoration: none;
+  color: var(--color-text);
 }

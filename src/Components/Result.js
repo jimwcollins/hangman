@@ -1,11 +1,23 @@
+import styled from 'styled-components';
+import Welcome from './Welcome';
+import MainButton from './MainButton';
+
+const ResultContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+`;
+
+// const ResultMsg = styled(Welcome)``;
+
 const Result = (props) => {
   return (
-    <div className="result">
-      <h2>{props.win === 'true' ? 'You survived' : 'You died'}</h2>
-      <button className="btn" onClick={props.reset}>
-        Play again?
-      </button>
-    </div>
+    <ResultContainer>
+      <Welcome>{props.win === 'true' ? 'You survived' : 'You died'}</Welcome>
+      <MainButton onClick={props.reset} text="Play again?" />
+    </ResultContainer>
   );
 };
 

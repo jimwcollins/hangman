@@ -7,20 +7,24 @@ const Button = styled.button`
   padding: 1rem;
   background-color: var(--color-main);
   border: none;
+  border-radius: 1rem;
   cursor: var(--btn-cursor);
   font-family: var(--font-text);
   font-size: 1.75rem;
-`;
-
-const ButtonLink = styled(Link)`
-  text-decoration: none;
   color: var(--color-text);
 `;
 
-export default function MainButton({ target, children }) {
+export default function MainButton({ target, onClick, text }) {
   return (
-    <Button>
-      <ButtonLink to={target}>{children}</ButtonLink>
-    </Button>
+    <>
+      {target && (
+        <Button>
+          <Link to={target} className="link">
+            {text}
+          </Link>
+        </Button>
+      )}
+      {onClick && <Button onClick={onClick}>{text}</Button>}
+    </>
   );
 }

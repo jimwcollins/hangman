@@ -16,7 +16,7 @@ const Key = styled.button`
   width: 4rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: ${(props) => (props.used ? 'black' : '#7b1111')};
+  background-color: ${(props) => (props.used ? 'black' : 'var(--color-main)')};
   color: var(--color-text);
   opacity: ${(props) => (props.used ? 0.75 : 1)};
   cursor: var(--btn-cursor);

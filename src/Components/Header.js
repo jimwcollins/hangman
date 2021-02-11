@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from '@reach/router';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
@@ -24,9 +25,11 @@ const Title = styled.h1`
 const Header = () => {
   return (
     <HeaderContainer>
-      <Title>
-        <span>H</span>angman
-      </Title>
+      <Link to="/" className="link">
+        <Title>
+          <span>H</span>angman
+        </Title>
+      </Link>
     </HeaderContainer>
   );
 };

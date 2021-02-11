@@ -1,5 +1,6 @@
 import React from 'react';
 import AnimCanvas from './AnimCanvas';
+import styled from 'styled-components';
 
 const drawStages = [
   {}, // New Game
