@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Hangman from './Hangman';
 import Counter from './Counter';
-import Phrase from './Phrase';
+import Phrase from './Phrase/Phrase';
 import Keyboard from './Keyboard';
 import Result from './Result';
 
@@ -92,12 +92,6 @@ const Game = ({ canvasSize }) => {
         type: 'NEW',
         lettersToGuess: newPhrase.length,
       });
-
-      // Handle spaces
-      const spaces = newPhrase.filter((letter) => letter === ' ');
-
-      if (spaces.length > 0)
-        dispatchGame({ type: 'CORRECT_GUESS', correctLetters: spaces });
     }
   }, [gameState.gameStatus]);
 
