@@ -47,6 +47,9 @@ const Phrase = ({ newPhrase, correctGuesses }) => {
   // Populate an object with all letters in word and save to state
   // Each letters has initial value of false (has not been guessed)
   useEffect(() => {
+    console.log('New phrase:', newPhrase);
+    console.log('State:', phraseState);
+
     const phraseObj = newPhrase.reduce((phrase, letter) => {
       phrase[letter] = false;
       return phrase;
@@ -60,7 +63,6 @@ const Phrase = ({ newPhrase, correctGuesses }) => {
   useEffect(() => {
     if (correctGuesses.length > 0) {
       const newGuess = correctGuesses[correctGuesses.length - 1];
-      console.log('new guess made', newGuess);
       setPhraseState((phraseState) => ({ ...phraseState, [newGuess]: true }));
     }
   }, [correctGuesses]);

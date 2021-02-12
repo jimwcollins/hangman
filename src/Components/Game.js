@@ -17,7 +17,13 @@ const HangmanContainer = styled.div`
 `;
 
 // Initial phrases and game state
-const phraseBank = ['NORTHCODERS', 'HANGMAN', 'JAMES COLLINS'];
+const phraseBank = [
+  'HALLOWEEN',
+  'THE SILENCE OF THE LAMBS',
+  'THE SIXTH SENSE',
+  'THE EXORCIST',
+  'THE BABADOOK',
+];
 
 const initialGameState = {
   correctGuesses: [],
@@ -106,6 +112,7 @@ const Game = ({ canvasSize }) => {
   };
 
   const resetGame = () => {
+    setCurrentPhrase([]);
     dispatchGame({ type: 'RESET' });
   };
 
