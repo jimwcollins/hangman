@@ -23,6 +23,7 @@ const phraseBank = [
   'THE SIXTH SENSE',
   'THE EXORCIST',
   'THE BABADOOK',
+  'T E',
 ];
 
 const initialGameState = {
@@ -87,10 +88,14 @@ const Game = ({ canvasSize }) => {
       const newPhrase = phraseBank[randomIndex].split('');
       setCurrentPhrase(newPhrase);
 
+      // Discount spaces when calculating letters to guess
+      const lettersToGuess = newPhrase.filter((letter) => letter !== ' ')
+        .length;
+
       // Now use our reducer to update our game state
       dispatchGame({
         type: 'NEW',
-        lettersToGuess: newPhrase.length,
+        lettersToGuess,
       });
     }
   }, [gameState.gameStatus]);
