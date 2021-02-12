@@ -8,6 +8,7 @@ import Home from './Components/Home';
 import Game from './Components/Game';
 import Wallpaper from '../src/images/Dark_Black_Wallpaper.jpeg';
 
+// Styles
 const AppContainer = styled.div`
   display: grid;
   grid-template-columns:
@@ -24,6 +25,21 @@ const AppContainer = styled.div`
   background-size: cover;
 `;
 
+const GameRouter = styled(Router)`
+  grid-area: app;
+
+  display: grid;
+  height: 100%;
+  grid-template-columns: 40% 60%;
+  grid-template-areas: 'hangman control';
+  column-gap: 5rem;
+  justify-items: center;
+
+  border-radius: 2rem;
+  padding: 2rem;
+`;
+
+// Component
 const App = () => {
   const [canvasSize] = useState({ width: 400, height: 410 });
 
@@ -31,10 +47,10 @@ const App = () => {
     <AppContainer>
       <Header />
 
-      <Router className="game">
+      <GameRouter>
         <Home path="/" canvasSize={canvasSize} />
         <Game path="/game" canvasSize={canvasSize} />
-      </Router>
+      </GameRouter>
     </AppContainer>
   );
 };

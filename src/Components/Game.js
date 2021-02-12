@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import Hangman from './Hangman';
 import Counter from './Counter';
-import Phrase from './Phrase';
+import Phrase from './Phrase/Phrase';
 import Keyboard from './Keyboard';
 import Result from './Result';
 
@@ -16,11 +16,25 @@ const HangmanContainer = styled.div`
   align-items: center;
 `;
 
+const Control = styled.div`
+  grid-area: control;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 // Initial phrases and game state
-const phraseBank = ['NORTHCODERS', 'HANGMAN', 'JAMES COLLINS'];
+const phraseBank = [
+  'HALLOWEEN',
+  'THE SILENCE OF THE LAMBS',
+  'THE SIXTH SENSE',
+  'THE EXORCIST',
+  'THE BABADOOK',
+];
 
 const initialGameState = {
-  guesses: [],
+  correctGuesses: [],
   lettersToGuess: 0,
   wrongGuesses: 0,
   gameStatus: 'new',
@@ -42,7 +56,10 @@ const gameReducer = (currentGameState, action) => {
 
       return {
         ...currentGameState,
-        guesses: [...currentGameState.guesses, action.correctLetters[0]],
+        correctGuesses: [
+          ...currentGameState.correctGuesses,
+          action.correctLetters[0],
+        ],
         lettersToGuess: newLettersToGuess,
         gameStatus: newLettersToGuess === 0 ? 'won' : 'running',
       };
@@ -72,23 +89,19 @@ const Game = ({ canvasSize }) => {
 
   useEffect(() => {
     if (gameState.gameStatus === 'new') {
-      // At the start of the game, grab a new word at random
-      // Split into array and slot into our current currentPhrase
       const randomIndex = Math.floor(Math.random() * phraseBank.length);
       const newPhrase = phraseBank[randomIndex].split('');
       setCurrentPhrase(newPhrase);
 
+      // Discount spaces when calculating letters to guess
+      const lettersToGuess = newPhrase.filter((letter) => letter !== ' ')
+        .length;
+
       // Now use our reducer to update our game state
       dispatchGame({
         type: 'NEW',
-        lettersToGuess: newPhrase.length,
+        lettersToGuess,
       });
-
-      // Handle spaces
-      const spaces = newPhrase.filter((letter) => letter === ' ');
-
-      if (spaces.length > 0)
-        dispatchGame({ type: 'CORRECT_GUESS', correctLetters: spaces });
     }
   }, [gameState.gameStatus]);
 
@@ -103,6 +116,7 @@ const Game = ({ canvasSize }) => {
   };
 
   const resetGame = () => {
+    setCurrentPhrase([]);
     dispatchGame({ type: 'RESET' });
   };
 
@@ -112,8 +126,12 @@ const Game = ({ canvasSize }) => {
         <Hangman drawTo={gameState.wrongGuesses} canvasSize={canvasSize} />
         <Counter wrongGuesses={gameState.wrongGuesses} />
       </HangmanContainer>
-      <div className="control">
-        <Phrase currentPhrase={currentPhrase} guesses={gameState.guesses} />
+      <Control>
+        <Phrase
+          newPhrase={currentPhrase}
+          correctGuesses={gameState.correctGuesses}
+          gameStatus={gameState.gameStatus}
+        />
         {gameState.gameStatus !== 'running' ? (
           <Result
             win={gameState.gameStatus === 'won' ? 'true' : 'false'}
@@ -122,7 +140,7 @@ const Game = ({ canvasSize }) => {
         ) : (
           <Keyboard handleGuess={handleGuess} />
         )}
-      </div>
+      </Control>
     </>
   );
 };

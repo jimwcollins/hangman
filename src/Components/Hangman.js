@@ -15,7 +15,7 @@ const drawStages = [
   { moveTo: [250, 150], line: [50, 75] }, // Arm 2
 ];
 
-const Hangman = ({ drawTo, canvasSize }) => {
+const Hangman = ({ drawTo, canvasSize, className }) => {
   // The draw function draws each stage depending on data from the drawStage array
   // and the current stage, provided by the main game or by the animation useEffect on home page
   // We pass this to be drawn by our AnimCanvas component
@@ -51,16 +51,16 @@ const Hangman = ({ drawTo, canvasSize }) => {
 
   const drawCircle = (ctx, frame, toDraw) => {
     const [centerX, centreY, radius] = toDraw.circle;
-
     const endAngle = (frame / 30) * Math.PI;
-    console.log('endAngle:', endAngle);
 
     ctx.beginPath();
     ctx.arc(centerX, centreY, radius, 0, endAngle);
     ctx.stroke();
   };
 
-  return <AnimCanvas draw={draw} canvasSize={canvasSize} />;
+  return (
+    <AnimCanvas draw={draw} canvasSize={canvasSize} className={className} />
+  );
 };
 
 export default Hangman;

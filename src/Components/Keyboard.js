@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Transition } from 'react-transition-group';
 
 const Keys = styled.div`
   display: flex;
@@ -8,6 +9,10 @@ const Keys = styled.div`
   align-content: space-between;
   width: 80%;
   margin-top: 6rem;
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  transform: ${({ state }) =>
+    state === 'entered' ? 'translateY(0rem)' : 'translateY(3rem)'};
+  transition: all 0.5s;
 `;
 
 const Key = styled.button`
@@ -16,9 +21,9 @@ const Key = styled.button`
   width: 4rem;
   border: none;
   border-radius: 0.5rem;
-  background-color: ${(props) => (props.used ? 'black' : 'var(--color-main)')};
+  background-color: ${({ used }) => (used ? 'black' : 'var(--color-main)')};
   color: var(--color-text);
-  opacity: ${(props) => (props.used ? 0.75 : 1)};
+  opacity: ${({ used }) => (used ? 0.75 : 1)};
   cursor: var(--btn-cursor);
 `;
 
@@ -26,6 +31,7 @@ class Keyboard extends React.Component {
   state = {
     alphabet: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
     buttonStatus: {},
+    showKeys: true,
   };
 
   handleButton = (char) => {
@@ -40,28 +46,32 @@ class Keyboard extends React.Component {
 
   render() {
     return (
-      <Keys>
-        {this.state.alphabet.split('').map((char) => {
-          return (
-            <>
-              {this.state.buttonStatus.hasOwnProperty(char) ? (
-                <Key used key={char}>
-                  {char}
-                </Key>
-              ) : (
-                <Key
-                  key={char}
-                  onClick={() => {
-                    this.handleButton(char);
-                  }}
-                >
-                  {char}
-                </Key>
-              )}
-            </>
-          );
-        })}
-      </Keys>
+      <Transition in={this.state.showKeys} timeout={500} appear={true}>
+        {(state) => (
+          <Keys state={state}>
+            {this.state.alphabet.split('').map((char) => {
+              return (
+                <>
+                  {this.state.buttonStatus.hasOwnProperty(char) ? (
+                    <Key used key={char}>
+                      {char}
+                    </Key>
+                  ) : (
+                    <Key
+                      key={char}
+                      onClick={() => {
+                        this.handleButton(char);
+                      }}
+                    >
+                      {char}
+                    </Key>
+                  )}
+                </>
+              );
+            })}
+          </Keys>
+        )}
+      </Transition>
     );
   }
 }
