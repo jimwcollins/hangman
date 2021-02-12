@@ -19,16 +19,16 @@ const WelcomeText = styled.h2`
   font-size: 5rem;
   color: var(--color-text);
   margin-bottom: 3rem;
-  opacity: ${(props) => (props.state === 'entered' ? 1 : 0)};
-  transform: ${(props) =>
-    props.state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  transform: ${({ state }) =>
+    state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};
   transition: all 1s;
 `;
 
 const WelcomeButton = styled(MainButton)`
-  opacity: ${(props) => (props.state === 'entered' ? 1 : 0)};
-  transform: ${(props) =>
-    props.state === 'entered' ? 'translateY(0rem)' : 'translateY(3rem)'};
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  transform: ${({ state }) =>
+    state === 'entered' ? 'translateY(0rem)' : 'translateY(3rem)'};
   transition: all 1s;
 `;
 

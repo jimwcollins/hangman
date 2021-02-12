@@ -4,6 +4,10 @@ import styled from 'styled-components';
 export const PhraseContainer = styled.div`
   display: flex;
   margin-top: 7rem;
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  transform: ${({ state }) =>
+    state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};
+  transition: all 0.5s;
 `;
 
 export const LetterBox = styled.div`
@@ -21,10 +25,8 @@ export const PhraseLetter = styled.div`
 
   // Animation on letter guess
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
-
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};
-
   transition: all 1s;
 `;
 
