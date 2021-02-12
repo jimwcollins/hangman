@@ -16,6 +16,14 @@ const HangmanContainer = styled.div`
   align-items: center;
 `;
 
+const Control = styled.div`
+  grid-area: control;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+`;
+
 // Initial phrases and game state
 const phraseBank = [
   'HALLOWEEN',
@@ -81,8 +89,6 @@ const Game = ({ canvasSize }) => {
 
   useEffect(() => {
     if (gameState.gameStatus === 'new') {
-      // At the start of the game, grab a new word at random
-      // Split into array and slot into our current currentPhrase
       const randomIndex = Math.floor(Math.random() * phraseBank.length);
       const newPhrase = phraseBank[randomIndex].split('');
       setCurrentPhrase(newPhrase);
@@ -120,7 +126,7 @@ const Game = ({ canvasSize }) => {
         <Hangman drawTo={gameState.wrongGuesses} canvasSize={canvasSize} />
         <Counter wrongGuesses={gameState.wrongGuesses} />
       </HangmanContainer>
-      <div className="control">
+      <Control>
         <Phrase
           newPhrase={currentPhrase}
           correctGuesses={gameState.correctGuesses}
@@ -134,7 +140,7 @@ const Game = ({ canvasSize }) => {
         ) : (
           <Keyboard handleGuess={handleGuess} />
         )}
-      </div>
+      </Control>
     </>
   );
 };
