@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import './App.css';
 import Header from './Components//Header';
-import Home from './Components/Home';
+import Home from './Components/Home/Home';
 import Game from './Components/Game';
 import Wallpaper from '../src/images/Dark_Black_Wallpaper.jpeg';
 
