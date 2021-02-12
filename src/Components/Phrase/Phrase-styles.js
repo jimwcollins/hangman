@@ -7,9 +7,7 @@ export const PhraseContainer = styled.div`
   justify-content: center;
   margin-top: 7rem;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
-  transform: ${({ state }) =>
-    state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};
-  transition: all 0.5s;
+  transition: opacity 0.5s;
 `;
 
 export const LetterBox = styled.div`
@@ -31,7 +29,7 @@ export const PhraseLetter = styled.div`
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};
-  transition: all 1s;
+  transition: all 0.5s cubic-bezier(0.2, 0.33, 0.69, 1.46);
 `;
 
 export const PhraseSpace = styled.div`
@@ -43,5 +41,5 @@ export const PhraseSpace = styled.div`
 
   // Animation on letter guess
   opacity: ${({ state }) => (state === 'exited' ? 0 : 1)};
-  transition: opacity 1s;
+  transition: opacity 0.5s;
 `;

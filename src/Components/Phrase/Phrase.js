@@ -60,7 +60,7 @@ const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
 
     return (
       <LetterBox key={index}>
-        <Transition in={phraseState[letter]} timeout={200}>
+        <Transition in={phraseState[letter]} timeout={500}>
           {(state) => (
             <PhraseLetter
               state={state}
@@ -74,7 +74,7 @@ const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
             </PhraseLetter>
           )}
         </Transition>
-        <Transition in={!phraseState[letter]} timeout={200}>
+        <Transition in={!phraseState[letter]} timeout={500}>
           {(state) => <PhraseSpace state={state}>&mdash;</PhraseSpace>}
         </Transition>
       </LetterBox>
