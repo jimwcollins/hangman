@@ -18,7 +18,8 @@ export const LetterBox = styled.div`
 export const PhraseLetter = styled.div`
   font-family: var(--font-display);
   font-size: 6.5rem;
-  color: var(--color-text);
+  color: ${({ correct }) =>
+    correct ? 'var(--color-text)' : 'var(--color-main)'};
   letter-spacing: 2rem;
   margin: ${({ space }) =>
     space && '0 2rem'}; // If letter is a space add margin

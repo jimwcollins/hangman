@@ -23,7 +23,6 @@ const phraseBank = [
   'THE SIXTH SENSE',
   'THE EXORCIST',
   'THE BABADOOK',
-  'T E',
 ];
 
 const initialGameState = {
@@ -125,6 +124,7 @@ const Game = ({ canvasSize }) => {
         <Phrase
           newPhrase={currentPhrase}
           correctGuesses={gameState.correctGuesses}
+          gameStatus={gameState.gameStatus}
         />
         {gameState.gameStatus !== 'running' ? (
           <Result

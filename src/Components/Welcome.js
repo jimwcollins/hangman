@@ -47,16 +47,14 @@ export default function Welcome() {
     <WelcomeContainer>
       <Transition in={showWelcome} timeout={1000} appear={true}>
         {(state) => (
-          <WelcomeText state={state}>Want to play a game?</WelcomeText>
-        )}
-      </Transition>
-      <Transition in={showWelcome} timeout={1000} appear={true}>
-        {(state) => (
-          <WelcomeButton
-            text="Hell, yeah!"
-            state={state}
-            onClick={() => startGame()}
-          />
+          <>
+            <WelcomeText state={state}>Want to play a game?</WelcomeText>
+            <WelcomeButton
+              text="Hell, yeah!"
+              state={state}
+              onClick={() => startGame()}
+            />
+          </>
         )}
       </Transition>
     </WelcomeContainer>

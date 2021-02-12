@@ -10,9 +10,13 @@ const Home = ({ canvasSize }) => {
   // Complete animation for home page
   // Triggers hangman draw roughly once every second until complete
   useEffect(() => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (drawStage < 10) setDrawStage((prevStage) => prevStage + 1);
     }, 1100);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, [drawStage]);
 
   return (
