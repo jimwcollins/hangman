@@ -8,14 +8,12 @@ import {
   PhraseSpace,
 } from './Phrase-styles';
 
-// Component
 const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
   const [showPhrase] = useState(true);
   const [phraseState, setPhraseState] = useState({});
   const [losingState, setLosingState] = useState({});
 
-  // Populate an object with all letters in word and save to state
-  // Each letters has initial value of false (has not been guessed)
+  // Set up new phrase state with all values false
   useEffect(() => {
     const phraseObj = newPhrase.reduce((phrase, letter) => {
       if (letter !== ' ') phrase[letter] = false;
@@ -25,8 +23,7 @@ const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
     setPhraseState(phraseObj);
   }, [newPhrase]);
 
-  // Whenever a correct guess is made, change the value of that letter
-  // in the phrase state to true
+  // Whenever a correct guess is made, change the value of that letter in phrase state
   useEffect(() => {
     if (correctGuesses.length > 0) {
       const newGuess = correctGuesses[correctGuesses.length - 1];
@@ -50,47 +47,43 @@ const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
     }
   }, [gameStatus]);
 
-  // Return both letter and the gap - one hidden, one shown.
-  // Transition the hide/show for each depending on values in phrase state
-  // Take the colour of the letter from phrase state normally, or losing state
-  // if the game has been lost
+  // Generate phrase, using both the letter and the gap - one hidden, one shown.
+  // Transition the hide/show for each depending on phrase state
+  const phrase = newPhrase.map((letter, index) => {
+    if (letter === ' ') {
+      return (
+        <PhraseLetter space key={index}>
+          {letter}
+        </PhraseLetter>
+      );
+    }
+
+    return (
+      <LetterBox key={index}>
+        <Transition in={phraseState[letter]} timeout={200}>
+          {(state) => (
+            <PhraseLetter
+              state={state}
+              correct={
+                gameStatus === 'lost'
+                  ? losingState[letter]
+                  : phraseState[letter]
+              }
+            >
+              {letter}
+            </PhraseLetter>
+          )}
+        </Transition>
+        <Transition in={!phraseState[letter]} timeout={200}>
+          {(state) => <PhraseSpace state={state}>&mdash;</PhraseSpace>}
+        </Transition>
+      </LetterBox>
+    );
+  });
+
   return (
     <Transition in={showPhrase} timeout={500} appear={true}>
-      {(state) => (
-        <PhraseContainer state={state}>
-          {newPhrase.map((letter, index) => {
-            if (letter !== ' ') {
-              return (
-                <LetterBox key={index}>
-                  <Transition in={phraseState[letter]} timeout={200}>
-                    {(state) => (
-                      <PhraseLetter
-                        state={state}
-                        correct={
-                          gameStatus === 'lost'
-                            ? losingState[letter]
-                            : phraseState[letter]
-                        }
-                      >
-                        {letter}
-                      </PhraseLetter>
-                    )}
-                  </Transition>
-                  <Transition in={!phraseState[letter]} timeout={200}>
-                    {(state) => <PhraseSpace state={state}>_</PhraseSpace>}
-                  </Transition>
-                </LetterBox>
-              );
-            } else {
-              return (
-                <PhraseLetter space key={index}>
-                  {letter}
-                </PhraseLetter>
-              );
-            }
-          })}
-        </PhraseContainer>
-      )}
+      {(state) => <PhraseContainer state={state}>{phrase}</PhraseContainer>}
     </Transition>
   );
 };

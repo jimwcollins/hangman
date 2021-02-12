@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 export const PhraseContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-top: 7rem;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transform: ${({ state }) =>
@@ -13,6 +15,7 @@ export const PhraseContainer = styled.div`
 export const LetterBox = styled.div`
   display: flex;
   flex-direction: column;
+  height: 10rem;
 `;
 
 export const PhraseLetter = styled.div`
@@ -36,7 +39,7 @@ export const PhraseSpace = styled.div`
   font-size: 6.5rem;
   color: var(--color-main);
   letter-spacing: 2rem;
-  transform: translateY(-8rem);
+  transform: translateY(-6rem);
 
   // Animation on letter guess
   opacity: ${({ state }) => (state === 'exited' ? 0 : 1)};
