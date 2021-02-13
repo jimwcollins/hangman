@@ -1,11 +1,9 @@
 // Phrase styles
 import styled from 'styled-components';
 
-export const PhraseContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: 7rem;
+export const PhraseContainer = styled.p`
+  overflow-wrap: normal;
+  text-align: center;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transition: opacity 0.5s;
 `;
@@ -16,30 +14,29 @@ export const LetterBox = styled.div`
   height: 10rem;
 `;
 
-export const PhraseLetter = styled.div`
+export const PhraseLetter = styled.span`
+  position: relative;
   font-family: var(--font-display);
   font-size: 6.5rem;
   color: ${({ correct }) =>
     correct ? 'var(--color-text)' : 'var(--color-main)'};
-  letter-spacing: 2rem;
-  margin: ${({ space }) =>
-    space && '0 2rem'}; // If letter is a space add margin
+  margin: ${({ space }) => (space ? '0 1rem' : '0 0.5rem')};
 
   // Animation on letter guess
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
-  transform: ${({ state }) =>
-    state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};
-  transition: all 0.5s cubic-bezier(0.2, 0.33, 0.69, 1.46);
+  top: ${({ state }) => (state === 'entered' ? '0' : '-3rem')};
+  transition: all 0.3s cubic-bezier(0.2, 0.33, 0.69, 1.46);
 `;
 
-export const PhraseSpace = styled.div`
+export const PhraseSpace = styled.span`
+  position: relative;
   font-family: var(--font-text);
   font-size: 6.5rem;
   color: var(--color-main);
-  letter-spacing: 2rem;
-  transform: translateY(-6rem);
+  margin: 0 0.5rem;
+  top: 0.25rem;
 
   // Animation on letter guess
-  opacity: ${({ state }) => (state === 'exited' ? 0 : 1)};
-  transition: opacity 0.5s;
+  opacity: ${({ state }) => (state === 'exiting' ? 0 : 1)};
+  transition: opacity 0.2s;
 `;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Transition } from 'react-transition-group';
+import { SwitchTransition, Transition } from 'react-transition-group';
 
 import {
   PhraseContainer,
@@ -59,30 +59,31 @@ const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
     }
 
     return (
-      <LetterBox key={index}>
-        <Transition in={phraseState[letter]} timeout={500}>
-          {(state) => (
-            <PhraseLetter
-              state={state}
-              correct={
-                gameStatus === 'lost'
-                  ? losingState[letter]
-                  : phraseState[letter]
-              }
-            >
-              {letter}
-            </PhraseLetter>
-          )}
+      <SwitchTransition mode="out-in">
+        <Transition key={phraseState[letter]} timeout={300}>
+          {(state) =>
+            phraseState[letter] ? (
+              <PhraseLetter
+                state={state}
+                correct={
+                  gameStatus === 'lost'
+                    ? losingState[letter]
+                    : phraseState[letter]
+                }
+              >
+                {letter}
+              </PhraseLetter>
+            ) : (
+              <PhraseSpace state={state}>_</PhraseSpace>
+            )
+          }
         </Transition>
-        <Transition in={!phraseState[letter]} timeout={500}>
-          {(state) => <PhraseSpace state={state}>&mdash;</PhraseSpace>}
-        </Transition>
-      </LetterBox>
+      </SwitchTransition>
     );
   });
 
   return (
-    <Transition in={showPhrase} timeout={500} appear={true}>
+    <Transition in={showPhrase} timeout={200} appear={true}>
       {(state) => <PhraseContainer state={state}>{phrase}</PhraseContainer>}
     </Transition>
   );
