@@ -17,7 +17,7 @@ export const LetterBox = styled.div`
 export const PhraseLetter = styled.span`
   position: relative;
   font-family: var(--font-display);
-  font-size: 6.5rem;
+  font-size: 5.5rem;
   color: ${({ correct }) =>
     correct ? 'var(--color-text)' : 'var(--color-main)'};
   margin: ${({ space }) => (space ? '0 1rem' : '0 0.5rem')};
@@ -31,7 +31,7 @@ export const PhraseLetter = styled.span`
 export const PhraseSpace = styled.span`
   position: relative;
   font-family: var(--font-text);
-  font-size: 6.5rem;
+  font-size: 5.5rem;
   color: var(--color-main);
   margin: 0 0.5rem;
   top: 0.25rem;

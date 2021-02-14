@@ -12,7 +12,7 @@ const Title = styled.h1`
   font-family: var(--font-display);
   color: var(--color-main);
   text-transform: uppercase;
-  font-size: 9rem;
+  font-size: 8rem;
   letter-spacing: 1rem;
   margin: 1rem;
 

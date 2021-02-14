@@ -1,12 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { SwitchTransition, Transition } from 'react-transition-group';
 
-import {
-  PhraseContainer,
-  LetterBox,
-  PhraseLetter,
-  PhraseSpace,
-} from './Phrase-styles';
+import { PhraseContainer, PhraseLetter, PhraseSpace } from './Phrase-styles';
 
 const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
   const [showPhrase] = useState(true);
