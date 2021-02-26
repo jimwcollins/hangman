@@ -3,6 +3,7 @@ import { navigate } from '@reach/router';
 import { Transition } from 'react-transition-group';
 
 import {
+  HomeDiv,
   Welcome,
   HomeHangman,
   WelcomeText,
@@ -36,7 +37,7 @@ const Home = ({ canvasSize }) => {
   return (
     <Transition in={showWelcome} timeout={1000} appear={true}>
       {(state) => (
-        <>
+        <HomeDiv>
           <HomeHangman
             drawTo={drawStage}
             canvasSize={canvasSize}
@@ -50,7 +51,7 @@ const Home = ({ canvasSize }) => {
               onClick={() => startGame()}
             />
           </Welcome>
-        </>
+        </HomeDiv>
       )}
     </Transition>
   );

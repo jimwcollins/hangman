@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 
 export const PhraseContainer = styled.p`
+  margin-top: 10rem;
   overflow-wrap: normal;
   text-align: center;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};

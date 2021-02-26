@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import './App.css';
 import Header from './Components//Header';
 import Home from './Components/Home/Home';
-import Game from './Components/Game';
+import Game from './Components/Game/Game';
 import Wallpaper from '../src/images/Dark_Black_Wallpaper.jpeg';
 
 // Styles
@@ -15,7 +15,7 @@ const AppContainer = styled.div`
     minmax(10rem, 1fr)
     minmax(min-content, 114rem)
     minmax(10rem, 1fr);
-  grid-template-rows: min-content 55rem;
+  grid-template-rows: min-content 1fr;
   grid-template-areas: '. header .' '. app .';
   align-items: center;
   height: 100vh;
@@ -30,8 +30,8 @@ const GameRouter = styled(Router)`
 
   display: grid;
   height: 100%;
-  grid-template-columns: 40% 60%;
-  grid-template-areas: 'hangman control';
+  grid-template-rows: 60% 40%;
+  grid-template-areas: 'game' 'control';
   column-gap: 5rem;
   justify-items: center;
 

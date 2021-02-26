@@ -3,8 +3,15 @@ import styled from 'styled-components';
 import Hangman from '../Hangman';
 import MainButton from '../MainButton';
 
+export const HomeDiv = styled.div`
+  grid-area: game;
+  width: 90%;
+  display: flex;
+  justify-content: space-around;
+`;
+
 export const Welcome = styled.div`
-  grid-area: control;
+  grid-area: phrase;
   display: flex;
   flex-direction: column;
   justify-content: center;
