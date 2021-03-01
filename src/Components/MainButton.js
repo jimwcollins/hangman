@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as BtnSvg } from '../images/blood-spot.svg';
+import { ReactComponent as BloodSpot } from '../images/blood-spot.svg';
 
 const Button = styled.button`
   display: relative;
@@ -16,7 +16,7 @@ const Button = styled.button`
   }
 `;
 
-const BloodBtn = styled(BtnSvg)`
+const BloodBtn = styled(BloodSpot)`
   height: 100%;
   width: 100%;
   fill: var(--color-main);
