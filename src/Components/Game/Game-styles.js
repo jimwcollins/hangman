@@ -1,5 +1,6 @@
 // Game styles
 import styled from 'styled-components';
+import Hangman from '../Hangman';
 
 export const GameDiv = styled.div`
   grid-area: game;
@@ -8,7 +9,9 @@ export const GameDiv = styled.div`
   justify-content: center;
 `;
 
-export const HangmanContainer = styled.div`
+export const GameHangman = styled(Hangman)`
+  width: 100%;
+  height: 100%;
   flex: 0;
   right: 0;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
@@ -23,12 +26,4 @@ export const PhraseDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-`;
-
-export const Control = styled.div`
-  grid-area: control;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80rem;
 `;

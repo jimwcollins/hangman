@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { Transition } from 'react-transition-group';
-import { GameDiv, HangmanContainer, PhraseDiv, Control } from './Game-styles';
+import { GameDiv, GameHangman, PhraseDiv } from './Game-styles';
 import { gameReducer, initialGameState } from './Game-reducer';
 
-import Hangman from '../Hangman';
 import Counter from '../Counter';
 import Phrase from '../Phrase/Phrase';
 import Keyboard from '../Keyboard';
@@ -64,12 +63,11 @@ const Game = ({ canvasSize }) => {
       <GameDiv>
         <Transition in={showHangman} timeout={200} appear={true}>
           {(state) => (
-            <HangmanContainer state={state}>
-              <Hangman
-                drawTo={gameState.wrongGuesses}
-                canvasSize={canvasSize}
-              />
-            </HangmanContainer>
+            <GameHangman
+              drawTo={gameState.wrongGuesses}
+              canvasSize={canvasSize}
+              state={state}
+            />
           )}
         </Transition>
         <PhraseDiv>
@@ -78,19 +76,19 @@ const Game = ({ canvasSize }) => {
             correctGuesses={gameState.correctGuesses}
             gameStatus={gameState.gameStatus}
           />
-          <Counter wrongGuesses={gameState.wrongGuesses} />
+          {gameState.gameStatus !== 'running' ? (
+            <Result
+              win={gameState.gameStatus === 'won' ? 'true' : 'false'}
+              reset={resetGame}
+            />
+          ) : (
+            <Counter wrongGuesses={gameState.wrongGuesses} />
+          )}
         </PhraseDiv>
       </GameDiv>
-      <Control>
-        {gameState.gameStatus !== 'running' ? (
-          <Result
-            win={gameState.gameStatus === 'won' ? 'true' : 'false'}
-            reset={resetGame}
-          />
-        ) : (
-          <Keyboard handleGuess={handleGuess} />
-        )}
-      </Control>
+      {gameState.gameStatus === 'running' && (
+        <Keyboard handleGuess={handleGuess} />
+      )}
     </>
   );
 };

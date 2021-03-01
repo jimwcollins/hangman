@@ -1,22 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ReactComponent as BtnSvg } from '../images/blood-swash.svg';
 
 const Button = styled.button`
-  height: 5rem;
-  padding: 1rem;
-  background-color: var(--color-main);
+  display: relative;
+  height: 8rem;
+  width: 18rem;
   border: none;
-  border-radius: 1rem;
+  background-color: transparent;
   cursor: var(--btn-cursor);
   font-family: var(--font-text);
-  font-size: 1.75rem;
-  color: var(--color-text);
+  font-size: 2rem;
+  color: white;
+`;
+
+const BloodBtn = styled(BtnSvg)`
+  height: 100%;
+  width: 100%;
+  fill: var(--color-main);
+`;
+
+const BtnText = styled.p`
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%);
 `;
 
 export default function MainButton({ onClick, text, className }) {
   return (
-    <Button onClick={onClick} className={className}>
-      {text}
+    <Button className={className} onClick={onClick}>
+      <BloodBtn />
+      <BtnText>{text}</BtnText>
     </Button>
   );
 }

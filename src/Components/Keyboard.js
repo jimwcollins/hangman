@@ -2,6 +2,14 @@ import React from 'react';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
 
+const KeyboardDiv = styled.div`
+  grid-area: control;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80rem;
+`;
+
 const Keys = styled.div`
   display: flex;
   flex-flow: row wrap;
@@ -46,32 +54,34 @@ class Keyboard extends React.Component {
 
   render() {
     return (
-      <Transition in={this.state.showKeys} timeout={500} appear={true}>
-        {(state) => (
-          <Keys state={state}>
-            {this.state.alphabet.split('').map((char) => {
-              return (
-                <>
-                  {this.state.buttonStatus.hasOwnProperty(char) ? (
-                    <Key used key={char}>
-                      {char}
-                    </Key>
-                  ) : (
-                    <Key
-                      key={char}
-                      onClick={() => {
-                        this.handleButton(char);
-                      }}
-                    >
-                      {char}
-                    </Key>
-                  )}
-                </>
-              );
-            })}
-          </Keys>
-        )}
-      </Transition>
+      <KeyboardDiv>
+        <Transition in={this.state.showKeys} timeout={500} appear={true}>
+          {(state) => (
+            <Keys state={state}>
+              {this.state.alphabet.split('').map((char) => {
+                return (
+                  <>
+                    {this.state.buttonStatus.hasOwnProperty(char) ? (
+                      <Key used key={char}>
+                        {char}
+                      </Key>
+                    ) : (
+                      <Key
+                        key={char}
+                        onClick={() => {
+                          this.handleButton(char);
+                        }}
+                      >
+                        {char}
+                      </Key>
+                    )}
+                  </>
+                );
+              })}
+            </Keys>
+          )}
+        </Transition>
+      </KeyboardDiv>
     );
   }
 }
