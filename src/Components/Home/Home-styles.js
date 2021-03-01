@@ -38,7 +38,7 @@ export const WelcomeText = styled.h2`
 `;
 
 export const WelcomeButton = styled(MainButton)`
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  opacity: ${({ state }) => (state === 'entered' ? 0.8 : 0)};
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(3rem)'};
   transition: all 1s;

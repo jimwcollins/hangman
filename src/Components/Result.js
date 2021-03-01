@@ -4,7 +4,7 @@ import MainButton from './MainButton';
 const ResultContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex: 1;
 `;
@@ -14,7 +14,7 @@ const ResultText = styled.h2`
   font-family: var(--font-display);
   font-size: 5rem;
   color: var(--color-text);
-  margin: 5rem;
+  margin-bottom: 1rem;
 `;
 
 // const ResultMsg = styled(Welcome)``;

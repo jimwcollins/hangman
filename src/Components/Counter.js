@@ -30,13 +30,6 @@ const CounterTextNum = styled(CounterText)`
   font-size: 2.5rem;
 `;
 
-const CounterBloodSpot = styled(BloodSpot)`
-  display: absolute;
-  height: 100%;
-  width: 100%;
-  fill: var(--color-main);
-`;
-
 const Counter = (props) => {
   return (
     <CounterContainer>
