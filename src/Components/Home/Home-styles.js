@@ -16,7 +16,7 @@ export const Welcome = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 9rem;
+  margin-bottom: 2rem;
 `;
 
 export const HomeHangman = styled(Hangman)`
@@ -30,7 +30,7 @@ export const WelcomeText = styled.h2`
   font-size: 5.5rem;
   color: var(--color-text);
   letter-spacing: 0.2rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};

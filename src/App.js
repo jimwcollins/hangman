@@ -34,9 +34,6 @@ const GameRouter = styled(Router)`
   grid-template-areas: 'game' 'control';
   column-gap: 5rem;
   justify-items: center;
-
-  border-radius: 2rem;
-  padding: 2rem;
 `;
 
 // Component

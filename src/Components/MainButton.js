@@ -1,17 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ReactComponent as BtnSvg } from '../images/blood-swash.svg';
+import { ReactComponent as BtnSvg } from '../images/blood-spot.svg';
 
 const Button = styled.button`
   display: relative;
-  height: 8rem;
-  width: 18rem;
+  height: 16rem;
+  width: 16rem;
   border: none;
   background-color: transparent;
   cursor: var(--btn-cursor);
-  font-family: var(--font-text);
-  font-size: 2rem;
-  color: white;
+  margin-right: 1rem;
+
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 const BloodBtn = styled(BtnSvg)`
@@ -22,8 +24,12 @@ const BloodBtn = styled(BtnSvg)`
 
 const BtnText = styled.p`
   position: absolute;
-  top: 50%;
-  left: 60%;
+  top: 58%;
+  left: 50%;
+  width: 25%;
+  font-family: var(--font-text);
+  font-size: 2.25rem;
+  color: white;
   transform: translate(-50%, -50%);
 `;
 
