@@ -5,7 +5,7 @@ import { gameReducer, initialGameState } from './Game-reducer';
 
 import Counter from '../Counter';
 import Phrase from '../Phrase/Phrase';
-import Keyboard from '../Keyboard';
+import Keyboard from '../Keyboard/Keyboard';
 import Result from '../Result';
 
 // Initial phrases and game state

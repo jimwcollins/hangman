@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from '@reach/router';
+import { navigate } from '@reach/router';
 import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
@@ -12,9 +12,11 @@ const Title = styled.h1`
   font-family: var(--font-display);
   color: var(--color-main);
   text-transform: uppercase;
-  font-size: 8rem;
+  font-size: ${({ gameRunning }) => (gameRunning ? '4rem' : '8rem')};
   letter-spacing: 1rem;
   margin: 1rem;
+  cursor: var(--btn-cursor);
+  transition: font-size 1s;
 
   & span {
     font-size: 150%;
@@ -22,14 +24,17 @@ const Title = styled.h1`
   }
 `;
 
-const Header = () => {
+const Header = ({ gameRunning, setGameRunning }) => {
+  const backToHome = () => {
+    setGameRunning(false);
+    navigate('/');
+  };
+
   return (
     <HeaderContainer>
-      <Link to="/" className="link">
-        <Title>
-          <span>H</span>angman
-        </Title>
-      </Link>
+      <Title gameRunning={gameRunning} onClick={backToHome}>
+        <span>H</span>angman
+      </Title>
     </HeaderContainer>
   );
 };

@@ -2,11 +2,12 @@
 import styled from 'styled-components';
 
 export const PhraseContainer = styled.p`
-  margin-top: 10rem;
+  margin-top: ${({ gameStatus }) =>
+    gameStatus === 'running' ? '10rem' : '0.5rem'};
   overflow-wrap: normal;
   text-align: center;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
-  transition: opacity 0.5s;
+  transition: all 1s;
 `;
 
 export const LetterBox = styled.div`

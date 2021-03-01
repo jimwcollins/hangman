@@ -14,6 +14,7 @@ const ResultText = styled.h2`
   font-family: var(--font-display);
   font-size: 5rem;
   color: var(--color-text);
+  letter-spacing: 0.3rem;
   margin-bottom: 1rem;
 `;
 

@@ -39,13 +39,18 @@ const GameRouter = styled(Router)`
 // Component
 const App = () => {
   const [canvasSize] = useState({ width: 400, height: 410 });
+  const [gameRunning, setGameRunning] = useState(false);
 
   return (
     <AppContainer>
-      <Header />
+      <Header gameRunning={gameRunning} setGameRunning={setGameRunning} />
 
       <GameRouter>
-        <Home path="/" canvasSize={canvasSize} />
+        <Home
+          path="/"
+          canvasSize={canvasSize}
+          setGameRunning={setGameRunning}
+        />
         <Game path="/game" canvasSize={canvasSize} />
       </GameRouter>
     </AppContainer>

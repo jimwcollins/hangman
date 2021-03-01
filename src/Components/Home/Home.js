@@ -10,7 +10,7 @@ import {
   WelcomeButton,
 } from './Home-styles';
 
-const Home = ({ canvasSize }) => {
+const Home = ({ canvasSize, setGameRunning }) => {
   const [drawStage, setDrawStage] = useState(0);
   const [showWelcome, setShowWelcome] = useState(true);
 
@@ -27,6 +27,7 @@ const Home = ({ canvasSize }) => {
   }, [drawStage]);
 
   const startGame = () => {
+    setGameRunning(true);
     setShowWelcome(false);
 
     setTimeout(() => {
