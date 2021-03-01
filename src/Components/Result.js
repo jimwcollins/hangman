@@ -12,7 +12,7 @@ const ResultContainer = styled.div`
 const ResultText = styled.h2`
   text-align: center;
   font-family: var(--font-display);
-  font-size: 5rem;
+  font-size: 4.75rem;
   color: var(--color-text);
   letter-spacing: 0.3rem;
   margin-bottom: 1rem;
