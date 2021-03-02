@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 const HeaderContainer = styled.header`
   grid-area: header;
-  margin-bottom: 5rem;
+  padding: 2rem 0;
 `;
 
 const Title = styled.h1`

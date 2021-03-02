@@ -76,18 +76,18 @@ const Game = ({ canvasSize }) => {
             correctGuesses={gameState.correctGuesses}
             gameStatus={gameState.gameStatus}
           />
-          {gameState.gameStatus !== 'running' ? (
-            <Result
-              win={gameState.gameStatus === 'won' ? 'true' : 'false'}
-              reset={resetGame}
-            />
-          ) : (
+          {gameState.gameStatus === 'running' && (
             <Counter wrongGuesses={gameState.wrongGuesses} />
           )}
         </PhraseDiv>
       </GameDiv>
-      {gameState.gameStatus === 'running' && (
+      {gameState.gameStatus === 'running' ? (
         <Keyboard handleGuess={handleGuess} />
+      ) : (
+        <Result
+          win={gameState.gameStatus === 'won' ? 'true' : 'false'}
+          reset={resetGame}
+        />
       )}
     </>
   );

@@ -20,7 +20,6 @@ const AppContainer = styled.div`
   align-items: center;
   height: 100vh;
   width: 100%;
-  padding-top: 5rem;
   background-image: url(${Wallpaper});
   background-size: cover;
 `;

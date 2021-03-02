@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import bloodLine from '../../images/blood-swash.svg';
 
 export const PhraseContainer = styled.p`
-  margin-top: ${({ gameStatus }) =>
-    gameStatus === 'running' ? '5rem' : '0.5rem'};
+  margin-top: 5rem;
   overflow-wrap: normal;
   text-align: center;
   line-height: 1.5;
@@ -31,7 +30,7 @@ export const PhraseSpace = styled.span`
   position: relative;
   font-family: var(--font-display);
   font-size: 6rem;
-  letter-spacing: 0.65em;
+  letter-spacing: 0.6em;
   color: var(--color-main);
   margin: 0 0.5rem;
   top: 0.25rem;
