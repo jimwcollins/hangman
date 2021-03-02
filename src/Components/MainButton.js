@@ -22,6 +22,10 @@ const Button = styled.button`
     opacity: 1;
     transform: scale(1.1);
   }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 const BtnText = styled.p`

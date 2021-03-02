@@ -25,8 +25,8 @@ export const Keys = styled.div`
 export const Key = styled.button`
   margin: 0.5rem;
   padding: 0.5rem;
-  width: 5.5rem;
-  height: 5rem;
+  width: 5.75rem;
+  height: 5.25rem;
   border: none;
   border-radius: 0.5rem;
   background-image: url(${BloodSquare});
@@ -38,6 +38,15 @@ export const Key = styled.button`
   color: var(--color-text);
   opacity: ${({ used }) => (used ? 0.5 : 1)};
   cursor: ${({ used }) => (used ? '' : 'var(--btn-cursor)')};
+  transition: transform 0.5s;
+
+  &:hover {
+    transform: ${({ used }) => (used ? '' : 'scale(1.2)')};
+  }
+
+  &:focus {
+    outline: none;
+  }
 `;
 
 // Use a break div to force line break in flex

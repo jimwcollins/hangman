@@ -10,11 +10,11 @@ import Result from '../Result';
 
 // Initial phrases and game state
 const phraseBank = [
-  'HALLOWEEN',
+  // 'HALLOWEEN',
   'THE SILENCE OF THE LAMBS',
-  'THE SIXTH SENSE',
-  'THE EXORCIST',
-  'THE BABADOOK',
+  // 'THE SIXTH SENSE',
+  // 'THE EXORCIST',
+  // 'THE BABADOOK',
 ];
 
 const Game = ({ canvasSize }) => {

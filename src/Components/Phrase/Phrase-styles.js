@@ -3,17 +3,12 @@ import styled from 'styled-components';
 
 export const PhraseContainer = styled.p`
   margin-top: ${({ gameStatus }) =>
-    gameStatus === 'running' ? '10rem' : '0.5rem'};
+    gameStatus === 'running' ? '5rem' : '0.5rem'};
   overflow-wrap: normal;
   text-align: center;
+  line-height: 1.5;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transition: all 1s;
-`;
-
-export const LetterBox = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 10rem;
 `;
 
 export const PhraseLetter = styled.span`
@@ -32,8 +27,8 @@ export const PhraseLetter = styled.span`
 
 export const PhraseSpace = styled.span`
   position: relative;
-  font-family: var(--font-text);
-  font-size: 7rem;
+  font-family: 'Helvetica Neue';
+  font-size: 10rem;
   color: var(--color-main);
   margin: 0 0.5rem;
   top: 0.25rem;
