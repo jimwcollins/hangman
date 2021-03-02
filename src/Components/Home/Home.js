@@ -27,8 +27,11 @@ const Home = ({ canvasSize, setGameRunning }) => {
   }, [drawStage]);
 
   const startGame = () => {
-    setGameRunning(true);
     setShowWelcome(false);
+
+    setTimeout(() => {
+      setGameRunning(true);
+    }, 1000);
 
     setTimeout(() => {
       navigate('/game');

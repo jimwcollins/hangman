@@ -1,5 +1,6 @@
 // Phrase styles
 import styled from 'styled-components';
+import bloodLine from '../../images/blood-swash.svg';
 
 export const PhraseContainer = styled.p`
   margin-top: ${({ gameStatus }) =>
@@ -7,6 +8,7 @@ export const PhraseContainer = styled.p`
   overflow-wrap: normal;
   text-align: center;
   line-height: 1.5;
+  letter-spacing: 1.5em;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transition: all 1s;
 `;
@@ -14,7 +16,7 @@ export const PhraseContainer = styled.p`
 export const PhraseLetter = styled.span`
   position: relative;
   font-family: var(--font-display);
-  font-size: 7rem;
+  font-size: 6rem;
   color: ${({ correct }) =>
     correct ? 'var(--color-text)' : 'var(--color-main)'};
   margin: ${({ space }) => (space ? '0 1rem' : '0 0.5rem')};
@@ -27,11 +29,15 @@ export const PhraseLetter = styled.span`
 
 export const PhraseSpace = styled.span`
   position: relative;
-  font-family: 'Helvetica Neue';
-  font-size: 10rem;
+  font-family: var(--font-display);
+  font-size: 6rem;
+  letter-spacing: 0.65em;
   color: var(--color-main);
   margin: 0 0.5rem;
   top: 0.25rem;
+  background-image: url(${bloodLine});
+  background-repeat: no-repeat;
+  background-position: bottom;
 
   // Animation on letter guess
   opacity: ${({ state }) => (state === 'exiting' ? 0 : 1)};

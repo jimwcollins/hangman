@@ -69,7 +69,7 @@ const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
                 {letter}
               </PhraseLetter>
             ) : (
-              <PhraseSpace state={state}>_</PhraseSpace>
+              <PhraseSpace state={state}>&nbsp;</PhraseSpace>
             )
           }
         </Transition>
