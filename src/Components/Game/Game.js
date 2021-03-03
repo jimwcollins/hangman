@@ -2,36 +2,51 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { Transition } from 'react-transition-group';
 import { GameDiv, GameHangman, PhraseDiv } from './Game-styles';
 import { gameReducer, initialGameState } from './Game-reducer';
+import { getFilms } from '../../utils/api';
 
 import Counter from '../Counter';
 import Phrase from '../Phrase/Phrase';
 import Keyboard from '../Keyboard/Keyboard';
 import Result from '../Result';
 
-// Initial phrases and game state
-const phraseBank = [
-  // 'HALLOWEEN',
-  'THE SILENCE OF THE LAMBS',
-  // 'THE SIXTH SENSE',
-  // 'THE EXORCIST',
-  // 'THE BABADOOK',
-];
-
 const Game = ({ canvasSize }) => {
-  const [maxErrors] = useState(10);
-  const [showHangman, setShowHangman] = useState(false);
+  const [phraseBank, setPhraseBank] = useState([]);
+  const [fetchNewFilms, setFetchNewFilms] = useState(true);
   const [currentPhrase, setCurrentPhrase] = useState([]);
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
+  const [maxErrors] = useState(10);
+  const [showHangman, setShowHangman] = useState(false);
+
+  // Only fetch films when we first load the app
+  useEffect(() => {
+    const fetchFilms = async () => {
+      try {
+        // Retrieve films from MovieDB API then place in state
+        const films = await getFilms();
+        setPhraseBank(films);
+        setFetchNewFilms(false);
+      } catch (err) {
+        console.log(err);
+        alert('Error retrieving films');
+      }
+    };
+
+    if (phraseBank.length === 0) fetchFilms();
+  }, [phraseBank]);
 
   useEffect(() => {
-    if (gameState.gameStatus === 'new') {
+    if (gameState.gameStatus === 'new' && !fetchNewFilms) {
       const randomIndex = Math.floor(Math.random() * phraseBank.length);
       const newPhrase = phraseBank[randomIndex].split('');
       setCurrentPhrase(newPhrase);
 
+      console.log(newPhrase);
+
       // Discount spaces when calculating letters to guess
       const lettersToGuess = newPhrase.filter((letter) => letter !== ' ')
         .length;
+
+      console.log(lettersToGuess);
 
       // Now use our reducer to update our game state
       dispatchGame({
@@ -39,7 +54,7 @@ const Game = ({ canvasSize }) => {
         lettersToGuess,
       });
     }
-  }, [gameState.gameStatus]);
+  }, [gameState.gameStatus, fetchNewFilms, phraseBank]);
 
   const handleGuess = (char) => {
     const correctLetters = currentPhrase.filter((letter) => letter === char);
