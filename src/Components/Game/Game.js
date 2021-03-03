@@ -3,6 +3,7 @@ import { Transition } from 'react-transition-group';
 import { GameDiv, GameHangman, PhraseDiv } from './Game-styles';
 import { gameReducer, initialGameState } from './Game-reducer';
 import { getFilms } from '../../utils/api';
+import { formatPhrase } from '../../utils/utils';
 
 import Counter from '../Counter';
 import Phrase from '../Phrase/Phrase';
@@ -37,16 +38,12 @@ const Game = ({ canvasSize }) => {
   useEffect(() => {
     if (gameState.gameStatus === 'new' && !fetchNewFilms) {
       const randomIndex = Math.floor(Math.random() * phraseBank.length);
-      const newPhrase = phraseBank[randomIndex].split('');
+      const newPhrase = formatPhrase(phraseBank[randomIndex]);
       setCurrentPhrase(newPhrase);
-
-      console.log(newPhrase);
 
       // Discount spaces when calculating letters to guess
       const lettersToGuess = newPhrase.filter((letter) => letter !== ' ')
         .length;
-
-      console.log(lettersToGuess);
 
       // Now use our reducer to update our game state
       dispatchGame({

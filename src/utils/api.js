@@ -20,5 +20,5 @@ export const getFilms = async () => {
     },
   });
 
-  return results.map((film) => film.title.toUpperCase());
+  return results.map((film) => film.title);
 };
