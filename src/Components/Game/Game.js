@@ -14,6 +14,7 @@ const Game = ({ canvasSize }) => {
   const [phraseBank, setPhraseBank] = useState([]);
   const [fetchNewFilms, setFetchNewFilms] = useState(true);
   const [currentPhrase, setCurrentPhrase] = useState([]);
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState();
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
   const [maxErrors] = useState(10);
   const [showHangman, setShowHangman] = useState(false);
@@ -42,6 +43,7 @@ const Game = ({ canvasSize }) => {
       const randomIndex = Math.floor(Math.random() * phraseBank.length);
       const newPhrase = formatPhrase(phraseBank[randomIndex]);
       setCurrentPhrase(newPhrase);
+      setCurrentPhraseIndex(randomIndex);
 
       // Discount spaces when calculating letters to guess
       const lettersToGuess = newPhrase.filter((letter) => letter !== ' ')
@@ -68,6 +70,14 @@ const Game = ({ canvasSize }) => {
 
   const resetGame = () => {
     setCurrentPhrase([]);
+
+    // Remove current phrase from phraseBank so we don't randomly get it again
+    setPhraseBank((currentPhraseBank) => {
+      const newPhraseBank = [...currentPhraseBank];
+      newPhraseBank.splice(currentPhraseIndex, 1);
+      return newPhraseBank;
+    });
+
     setShowHangman(false);
     dispatchGame({ type: 'RESET' });
   };
