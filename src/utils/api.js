@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { apiKey } from './api-config';
-import { checkPhrase } from './utils';
 
 const movieApi = axios.create({
   baseURL: 'https://api.themoviedb.org/3/',
