@@ -3,7 +3,7 @@ import { Transition } from 'react-transition-group';
 import { GameDiv, GameHangman, PhraseDiv } from './Game-styles';
 import { gameReducer, initialGameState } from './Game-reducer';
 import { getFilms } from '../../utils/api';
-import { formatPhrase } from '../../utils/utils';
+import { filterPhrases, formatPhrase } from '../../utils/utils';
 
 import Counter from '../Counter';
 import Phrase from '../Phrase/Phrase';
@@ -12,7 +12,6 @@ import Result from '../Result';
 
 const Game = ({ canvasSize }) => {
   const [phraseBank, setPhraseBank] = useState([]);
-  const [fetchNewFilms, setFetchNewFilms] = useState(true);
   const [currentPhrase, setCurrentPhrase] = useState([]);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState();
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
@@ -20,15 +19,16 @@ const Game = ({ canvasSize }) => {
   const [showHangman, setShowHangman] = useState(false);
 
   // Only fetch films when we first load the app
+  // Or we've used all films in current batch (i.e. phrase bank is empty)
   useEffect(() => {
     const fetchFilms = async () => {
       try {
         // Randomly set a page of results to fetch from api
-        const pageToFetch = Math.floor(Math.random() * 5);
-        // Retrieve films from MovieDB API then place in state
-        const films = await getFilms(pageToFetch);
-        setPhraseBank(films);
-        setFetchNewFilms(false);
+        // Filter out films with numbers then save to state
+        const pageToFetch = 1 + Math.floor(Math.random() * 4);
+        const apiPhrases = await getFilms(pageToFetch);
+        const filteredPhrases = filterPhrases(apiPhrases);
+        setPhraseBank(filteredPhrases);
       } catch (err) {
         console.log(err);
         alert('Sorry, error retrieving titles. Please try again later.');
@@ -39,7 +39,7 @@ const Game = ({ canvasSize }) => {
   }, [phraseBank]);
 
   useEffect(() => {
-    if (gameState.gameStatus === 'new' && !fetchNewFilms) {
+    if (gameState.gameStatus === 'new' && phraseBank.length !== 0) {
       const randomIndex = Math.floor(Math.random() * phraseBank.length);
       const newPhrase = formatPhrase(phraseBank[randomIndex]);
       setCurrentPhrase(newPhrase);
@@ -55,7 +55,7 @@ const Game = ({ canvasSize }) => {
         lettersToGuess,
       });
     }
-  }, [gameState.gameStatus, fetchNewFilms, phraseBank]);
+  }, [gameState.gameStatus, phraseBank]);
 
   const handleGuess = (char) => {
     const correctLetters = currentPhrase.filter((letter) => letter === char);

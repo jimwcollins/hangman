@@ -1,13 +1,12 @@
 import axios from 'axios';
 import { apiKey } from './api-config';
+import { checkPhrase } from './utils';
 
 const movieApi = axios.create({
   baseURL: 'https://api.themoviedb.org/3/',
 });
 
 export const getFilms = async (page) => {
-  console.log('Fetching page:', page);
-
   const {
     data: { results },
   } = await movieApi.get('discover/movie', {
@@ -22,5 +21,5 @@ export const getFilms = async (page) => {
     },
   });
 
-  return results.map((film) => film.title);
+  return results.map((films) => films.title);
 };
