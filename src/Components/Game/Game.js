@@ -22,13 +22,15 @@ const Game = ({ canvasSize }) => {
   useEffect(() => {
     const fetchFilms = async () => {
       try {
+        // Randomly set a page of results to fetch from api
+        const pageToFetch = Math.floor(Math.random() * 5);
         // Retrieve films from MovieDB API then place in state
-        const films = await getFilms();
+        const films = await getFilms(pageToFetch);
         setPhraseBank(films);
         setFetchNewFilms(false);
       } catch (err) {
         console.log(err);
-        alert('Error retrieving films');
+        alert('Sorry, error retrieving titles. Please try again later.');
       }
     };
 
