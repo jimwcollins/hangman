@@ -9,9 +9,11 @@ import Counter from '../Counter';
 import Phrase from '../Phrase/Phrase';
 import Keyboard from '../Keyboard/Keyboard';
 import Result from '../Result';
+import LoadSpinner from '../LoadSpinner';
 
 const Game = ({ canvasSize }) => {
   const [phraseBank, setPhraseBank] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [currentPhrase, setCurrentPhrase] = useState([]);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState();
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
@@ -21,7 +23,7 @@ const Game = ({ canvasSize }) => {
   // Only fetch films when we first load the app
   // Or we've used all films in current batch (i.e. phrase bank is empty)
   useEffect(() => {
-    const fetchFilms = async () => {
+    const fetchPhrases = async () => {
       try {
         // Randomly set a page of results to fetch from api
         // Filter out films with numbers then save to state
@@ -29,13 +31,14 @@ const Game = ({ canvasSize }) => {
         const apiPhrases = await getFilms(pageToFetch);
         const filteredPhrases = filterPhrases(apiPhrases);
         setPhraseBank(filteredPhrases);
+        setIsLoading(false);
       } catch (err) {
         console.log(err);
         alert('Sorry, error retrieving titles. Please try again later.');
       }
     };
 
-    if (phraseBank.length === 0) fetchFilms();
+    if (phraseBank.length === 0) fetchPhrases();
   }, [phraseBank]);
 
   useEffect(() => {
@@ -82,6 +85,10 @@ const Game = ({ canvasSize }) => {
     dispatchGame({ type: 'RESET' });
   };
 
+  if (isLoading) {
+    return <LoadSpinner />;
+  }
+
   return (
     <>
       <GameDiv>
@@ -108,10 +115,7 @@ const Game = ({ canvasSize }) => {
       {gameState.gameStatus === 'running' ? (
         <Keyboard handleGuess={handleGuess} />
       ) : (
-        <Result
-          win={gameState.gameStatus === 'won' ? 'true' : 'false'}
-          reset={resetGame}
-        />
+        <Result gameStatus={gameState.gameStatus} reset={resetGame} />
       )}
     </>
   );

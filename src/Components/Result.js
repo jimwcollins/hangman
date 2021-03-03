@@ -21,13 +21,15 @@ const ResultText = styled.h2`
 
 // const ResultMsg = styled(Welcome)``;
 
-const Result = (props) => {
+const Result = ({ gameStatus, reset }) => {
+  let resultText;
+  if (gameStatus === 'won') resultText = 'You survived';
+  else if (gameStatus === 'lost') resultText = 'You died';
+
   return (
     <ResultContainer>
-      <ResultText>
-        {props.win === 'true' ? 'You survived' : 'You died'}
-      </ResultText>
-      <MainButton onClick={props.reset} text="Play again?" />
+      <ResultText>{resultText}</ResultText>
+      <MainButton onClick={reset} text="Play again?" />
     </ResultContainer>
   );
 };
