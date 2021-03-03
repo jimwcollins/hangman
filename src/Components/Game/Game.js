@@ -2,32 +2,51 @@ import React, { useState, useEffect, useReducer } from 'react';
 import { Transition } from 'react-transition-group';
 import { GameDiv, GameHangman, PhraseDiv } from './Game-styles';
 import { gameReducer, initialGameState } from './Game-reducer';
+import { getFilms } from '../../utils/api';
+import { filterPhrases, formatPhrase } from '../../utils/utils';
 
 import Counter from '../Counter';
 import Phrase from '../Phrase/Phrase';
 import Keyboard from '../Keyboard/Keyboard';
 import Result from '../Result';
-
-// Initial phrases and game state
-const phraseBank = [
-  // 'HALLOWEEN',
-  'THE SILENCE OF THE LAMBS',
-  // 'THE SIXTH SENSE',
-  // 'THE EXORCIST',
-  // 'THE BABADOOK',
-];
+import LoadSpinner from '../LoadSpinner';
 
 const Game = ({ canvasSize }) => {
+  const [phraseBank, setPhraseBank] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [currentPhrase, setCurrentPhrase] = useState([]);
+  const [currentPhraseIndex, setCurrentPhraseIndex] = useState();
+  const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
   const [maxErrors] = useState(10);
   const [showHangman, setShowHangman] = useState(false);
-  const [currentPhrase, setCurrentPhrase] = useState([]);
-  const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
+
+  // Only fetch films when we first load the app
+  // Or we've used all films in current batch (i.e. phrase bank is empty)
+  useEffect(() => {
+    const fetchPhrases = async () => {
+      try {
+        // Randomly set a page of results to fetch from api
+        // Filter out films with numbers then save to state
+        const pageToFetch = 1 + Math.floor(Math.random() * 4);
+        const apiPhrases = await getFilms(pageToFetch);
+        const filteredPhrases = filterPhrases(apiPhrases);
+        setPhraseBank(filteredPhrases);
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err);
+        alert('Sorry, error retrieving titles. Please try again later.');
+      }
+    };
+
+    if (phraseBank.length === 0) fetchPhrases();
+  }, [phraseBank]);
 
   useEffect(() => {
-    if (gameState.gameStatus === 'new') {
+    if (gameState.gameStatus === 'new' && phraseBank.length !== 0) {
       const randomIndex = Math.floor(Math.random() * phraseBank.length);
-      const newPhrase = phraseBank[randomIndex].split('');
+      const newPhrase = formatPhrase(phraseBank[randomIndex]);
       setCurrentPhrase(newPhrase);
+      setCurrentPhraseIndex(randomIndex);
 
       // Discount spaces when calculating letters to guess
       const lettersToGuess = newPhrase.filter((letter) => letter !== ' ')
@@ -39,7 +58,7 @@ const Game = ({ canvasSize }) => {
         lettersToGuess,
       });
     }
-  }, [gameState.gameStatus]);
+  }, [gameState.gameStatus, phraseBank]);
 
   const handleGuess = (char) => {
     const correctLetters = currentPhrase.filter((letter) => letter === char);
@@ -54,9 +73,21 @@ const Game = ({ canvasSize }) => {
 
   const resetGame = () => {
     setCurrentPhrase([]);
+
+    // Remove current phrase from phraseBank so we don't randomly get it again
+    setPhraseBank((currentPhraseBank) => {
+      const newPhraseBank = [...currentPhraseBank];
+      newPhraseBank.splice(currentPhraseIndex, 1);
+      return newPhraseBank;
+    });
+
     setShowHangman(false);
     dispatchGame({ type: 'RESET' });
   };
+
+  if (isLoading) {
+    return <LoadSpinner />;
+  }
 
   return (
     <>
@@ -84,10 +115,7 @@ const Game = ({ canvasSize }) => {
       {gameState.gameStatus === 'running' ? (
         <Keyboard handleGuess={handleGuess} />
       ) : (
-        <Result
-          win={gameState.gameStatus === 'won' ? 'true' : 'false'}
-          reset={resetGame}
-        />
+        <Result gameStatus={gameState.gameStatus} reset={resetGame} />
       )}
     </>
   );
