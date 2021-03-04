@@ -17,6 +17,7 @@ const Game = ({ canvasSize }) => {
   const [currentPhrase, setCurrentPhrase] = useState([]);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState();
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
+  const [showGame, setShowGame] = useState(true);
   const [maxErrors] = useState(10);
   const [showHangman, setShowHangman] = useState(false);
 
@@ -47,6 +48,7 @@ const Game = ({ canvasSize }) => {
       const newPhrase = formatPhrase(phraseBank[randomIndex]);
       setCurrentPhrase(newPhrase);
       setCurrentPhraseIndex(randomIndex);
+      setShowGame(true);
 
       // Discount spaces when calculating letters to guess
       const lettersToGuess = newPhrase.filter((letter) => letter !== ' ')
@@ -73,6 +75,7 @@ const Game = ({ canvasSize }) => {
 
   const resetGame = () => {
     setCurrentPhrase([]);
+    setShowGame(false);
 
     // Remove current phrase from phraseBank so we don't randomly get it again
     setPhraseBank((currentPhraseBank) => {
@@ -81,8 +84,13 @@ const Game = ({ canvasSize }) => {
       return newPhraseBank;
     });
 
-    setShowHangman(false);
-    dispatchGame({ type: 'RESET' });
+    setTimeout(() => {
+      setShowHangman(false);
+    }, 1000);
+
+    setTimeout(() => {
+      dispatchGame({ type: 'RESET' });
+    }, 1500);
   };
 
   if (isLoading) {
@@ -90,32 +98,44 @@ const Game = ({ canvasSize }) => {
   }
 
   return (
-    <GameContainer>
-      <GameDiv>
-        <Transition in={showHangman} timeout={200} appear={true}>
-          {(state) => (
-            <GameHangman
-              drawTo={gameState.wrongGuesses}
-              canvasSize={canvasSize}
-              state={state}
+    <Transition in={showGame} timeout={700} appear={true}>
+      {(showGameState) => (
+        <GameContainer>
+          <GameDiv state={showGameState}>
+            <Transition in={showHangman} timeout={200} appear={true}>
+              {(hangmanState) => (
+                <GameHangman
+                  drawTo={gameState.wrongGuesses}
+                  canvasSize={canvasSize}
+                  state={hangmanState}
+                />
+              )}
+            </Transition>
+            <Phrase
+              newPhrase={currentPhrase}
+              correctGuesses={gameState.correctGuesses}
+              gameStatus={gameState.gameStatus}
+            />
+          </GameDiv>
+
+          {gameState.gameStatus === 'running' ? (
+            <Control>
+              <Counter
+                wrongGuesses={gameState.wrongGuesses}
+                state={showGameState}
+              />
+              <Keyboard handleGuess={handleGuess} />
+            </Control>
+          ) : (
+            <Result
+              gameStatus={gameState.gameStatus}
+              reset={resetGame}
+              state={showGameState}
             />
           )}
-        </Transition>
-        <Phrase
-          newPhrase={currentPhrase}
-          correctGuesses={gameState.correctGuesses}
-          gameStatus={gameState.gameStatus}
-        />
-      </GameDiv>
-      {gameState.gameStatus === 'running' ? (
-        <Control>
-          <Counter wrongGuesses={gameState.wrongGuesses} />
-          <Keyboard handleGuess={handleGuess} />
-        </Control>
-      ) : (
-        <Result gameStatus={gameState.gameStatus} reset={resetGame} />
+        </GameContainer>
       )}
-    </GameContainer>
+    </Transition>
   );
 };
 

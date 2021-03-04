@@ -14,10 +14,12 @@ export const GameContainer = styled.div`
 export const GameDiv = styled.div`
   grid-area: game;
   width: 100%;
-  height: 95%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  transition: opacity 0.7s;
 `;
 
 export const GameHangman = styled(Hangman)`

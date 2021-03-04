@@ -9,7 +9,6 @@ export const PhraseContainer = styled.p`
   line-height: 1.7;
   letter-spacing: 1.5em;
   margin-bottom: 3rem;
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transition: all 1s;
 `;
 

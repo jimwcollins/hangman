@@ -5,6 +5,8 @@ const CounterContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem;
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  transition: opacity 2s;
 `;
 
 const CounterText = styled.p`
@@ -30,14 +32,12 @@ const CounterTextNum = styled(CounterText)`
   font-size: 2.5rem;
 `;
 
-const Counter = (props) => {
+const Counter = ({ wrongGuesses, state }) => {
   return (
-    <CounterContainer>
+    <CounterContainer state={state}>
       <CounterText className="counter">Guesses</CounterText>
       <CounterNum>
-        <CounterTextNum className="counter">
-          {10 - props.wrongGuesses}
-        </CounterTextNum>
+        <CounterTextNum className="counter">{10 - wrongGuesses}</CounterTextNum>
       </CounterNum>
       <CounterText className="counter">remaining</CounterText>
     </CounterContainer>

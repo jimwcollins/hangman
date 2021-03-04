@@ -77,15 +77,7 @@ const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
     );
   });
 
-  return (
-    <Transition in={showPhrase} timeout={200} appear={true}>
-      {(state) => (
-        <PhraseContainer state={state} gameStatus={gameStatus}>
-          {phrase}
-        </PhraseContainer>
-      )}
-    </Transition>
-  );
+  return <PhraseContainer>{phrase}</PhraseContainer>;
 };
 
 export default Phrase;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { KeyboardDiv, Keys, Key, Break } from './Keyboard-styles';
+import { Keys, Key, Break } from './Keyboard-styles';
 import { Transition } from 'react-transition-group';
 
 const Keyboard = ({ handleGuess }) => {
