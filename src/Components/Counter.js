@@ -4,7 +4,7 @@ import BloodSpot from '../images/blood-spot.svg';
 const CounterContainer = styled.div`
   display: flex;
   align-items: center;
-  height: 3rem;
+  padding: 1rem;
 `;
 
 const CounterText = styled.p`

@@ -5,7 +5,7 @@ import Hangman from '../Hangman';
 export const GameContainer = styled.div`
   display: grid;
   height: 100%;
-  grid-template-rows: 58% 42%;
+  grid-template-rows: 56% 44%;
   grid-template-areas: 'game' 'control';
   column-gap: 5rem;
   justify-items: center;

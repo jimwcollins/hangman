@@ -26,7 +26,7 @@ const AppContainer = styled.div`
 
 const GameRouter = styled(Router)`
   grid-area: app;
-  height: 98%;
+  height: 93%;
   width: 100%;
 `;
 
