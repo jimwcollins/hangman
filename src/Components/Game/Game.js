@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
 import { Transition } from 'react-transition-group';
-import { GameDiv, GameHangman, PhraseDiv } from './Game-styles';
+import { GameContainer, GameDiv, GameHangman, Control } from './Game-styles';
 import { gameReducer, initialGameState } from './Game-reducer';
 import { getFilms } from '../../utils/api';
 import { filterPhrases, formatPhrase } from '../../utils/utils';
@@ -90,7 +90,7 @@ const Game = ({ canvasSize }) => {
   }
 
   return (
-    <>
+    <GameContainer>
       <GameDiv>
         <Transition in={showHangman} timeout={200} appear={true}>
           {(state) => (
@@ -101,23 +101,21 @@ const Game = ({ canvasSize }) => {
             />
           )}
         </Transition>
-        <PhraseDiv>
-          <Phrase
-            newPhrase={currentPhrase}
-            correctGuesses={gameState.correctGuesses}
-            gameStatus={gameState.gameStatus}
-          />
-          {gameState.gameStatus === 'running' && (
-            <Counter wrongGuesses={gameState.wrongGuesses} />
-          )}
-        </PhraseDiv>
+        <Phrase
+          newPhrase={currentPhrase}
+          correctGuesses={gameState.correctGuesses}
+          gameStatus={gameState.gameStatus}
+        />
       </GameDiv>
       {gameState.gameStatus === 'running' ? (
-        <Keyboard handleGuess={handleGuess} />
+        <Control>
+          <Counter wrongGuesses={gameState.wrongGuesses} />
+          <Keyboard handleGuess={handleGuess} />
+        </Control>
       ) : (
         <Result gameStatus={gameState.gameStatus} reset={resetGame} />
       )}
-    </>
+    </GameContainer>
   );
 };
 

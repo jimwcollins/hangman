@@ -2,11 +2,22 @@
 import styled from 'styled-components';
 import Hangman from '../Hangman';
 
+export const GameContainer = styled.div`
+  display: grid;
+  height: 100%;
+  grid-template-rows: 56% 44%;
+  grid-template-areas: 'game' 'control';
+  column-gap: 5rem;
+  justify-items: center;
+`;
+
 export const GameDiv = styled.div`
   grid-area: game;
   width: 100%;
+  height: 95%;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 export const GameHangman = styled(Hangman)`
@@ -19,11 +30,11 @@ export const GameHangman = styled(Hangman)`
   transition: all 2s;
 `;
 
-export const PhraseDiv = styled.div`
+export const Control = styled.div`
+  grid-area: control;
   flex: 1;
-  grid-area: phrase;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;

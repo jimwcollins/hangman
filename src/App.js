@@ -26,13 +26,8 @@ const AppContainer = styled.div`
 
 const GameRouter = styled(Router)`
   grid-area: app;
-
-  display: grid;
-  height: 100%;
-  grid-template-rows: 60% 40%;
-  grid-template-areas: 'game' 'control';
-  column-gap: 5rem;
-  justify-items: center;
+  height: 93%;
+  width: 100%;
 `;
 
 // Component

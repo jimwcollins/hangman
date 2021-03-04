@@ -3,11 +3,12 @@ import styled from 'styled-components';
 import bloodLine from '../../images/blood-swash.svg';
 
 export const PhraseContainer = styled.p`
-  margin-top: 5rem;
+  width: 60%;
   overflow-wrap: normal;
   text-align: center;
-  line-height: 1.5;
+  line-height: 1.7;
   letter-spacing: 1.5em;
+  margin-bottom: 3rem;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transition: all 1s;
 `;
