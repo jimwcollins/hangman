@@ -17,7 +17,7 @@ const Game = ({ canvasSize }) => {
   const [currentPhrase, setCurrentPhrase] = useState([]);
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState();
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
-  const [showGame, setShowGame] = useState(true);
+  const [startGame, setStartGame] = useState(true);
   const [maxErrors] = useState(10);
   const [showHangman, setShowHangman] = useState(false);
 
@@ -48,7 +48,7 @@ const Game = ({ canvasSize }) => {
       const newPhrase = formatPhrase(phraseBank[randomIndex]);
       setCurrentPhrase(newPhrase);
       setCurrentPhraseIndex(randomIndex);
-      setShowGame(true);
+      setStartGame(true);
 
       // Discount spaces when calculating letters to guess
       const lettersToGuess = newPhrase.filter((letter) => letter !== ' ')
@@ -74,9 +74,6 @@ const Game = ({ canvasSize }) => {
   };
 
   const resetGame = () => {
-    setCurrentPhrase([]);
-    setShowGame(false);
-
     // Remove current phrase from phraseBank so we don't randomly get it again
     setPhraseBank((currentPhraseBank) => {
       const newPhraseBank = [...currentPhraseBank];
@@ -84,13 +81,12 @@ const Game = ({ canvasSize }) => {
       return newPhraseBank;
     });
 
-    setTimeout(() => {
-      setShowHangman(false);
-    }, 1000);
+    setCurrentPhrase([]);
+    setShowHangman(false);
 
     setTimeout(() => {
       dispatchGame({ type: 'RESET' });
-    }, 1500);
+    }, 1000);
   };
 
   if (isLoading) {
@@ -98,11 +94,11 @@ const Game = ({ canvasSize }) => {
   }
 
   return (
-    <Transition in={showGame} timeout={700} appear={true}>
+    <Transition in={startGame} timeout={700} appear={true} onExited={resetGame}>
       {(showGameState) => (
         <GameContainer state={showGameState}>
           <GameDiv>
-            <Transition in={showHangman} timeout={200} appear={true}>
+            <Transition in={showHangman} timeout={1000} appear={true}>
               {(hangmanState) => (
                 <GameHangman
                   drawTo={gameState.wrongGuesses}
@@ -129,7 +125,7 @@ const Game = ({ canvasSize }) => {
                 ) : (
                   <Result
                     gameStatus={gameState.gameStatus}
-                    reset={resetGame}
+                    reset={() => setStartGame(false)}
                     controlState={controlState}
                   />
                 )

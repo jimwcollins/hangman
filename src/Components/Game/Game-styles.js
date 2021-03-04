@@ -29,7 +29,7 @@ export const GameHangman = styled(Hangman)`
   right: 0;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   width: ${({ state }) => (state === 'entered' ? '100%' : '0%')};
-  transition: all 2s;
+  transition: all 1s;
 `;
 
 export const Control = styled.div`
