@@ -6,7 +6,7 @@ import './App.css';
 import Header from './Components//Header';
 import Home from './Components/Home/Home';
 import Game from './Components/Game/Game';
-import Wallpaper from '../src/images/Dark_Black_Wallpaper.jpeg';
+import Wallpaper from '../src/images/GallowsBG.png';
 
 // Styles
 const AppContainer = styled.div`
@@ -22,6 +22,7 @@ const AppContainer = styled.div`
   width: 100%;
   background-image: url(${Wallpaper});
   background-size: cover;
+  background-position: right top;
 `;
 
 const GameRouter = styled(Router)`

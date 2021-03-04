@@ -1,8 +1,10 @@
 # Sticks + Stones
 
+## React Hangman
+
 A hangman game built in React with numerous animated elements – including an animated hangman. Phrases to guess are pulled from the Movie DB API.
 
-The hosted site can be found here: xx
+The hosted site can be found here: < To Come >
 
 &nbsp;
 
@@ -50,7 +52,7 @@ Install required project dependencies locally
 ### npm start
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open http://localhost:3000 to view it in the browser.
 
 ### npm run build
 
