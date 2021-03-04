@@ -21,7 +21,7 @@ const Keyboard = ({ handleGuess }) => {
   };
 
   return (
-    <Transition in={showKeys} timeout={500} appear={true}>
+    <Transition in={showKeys} timeout={1250} appear={true}>
       {(state) => (
         <Keys state={state}>
           {alphabet.split('').map((char) => {

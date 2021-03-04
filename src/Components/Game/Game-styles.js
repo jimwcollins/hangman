@@ -9,6 +9,8 @@ export const GameContainer = styled.div`
   grid-template-areas: 'game' 'control';
   column-gap: 5rem;
   justify-items: center;
+  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  transition: opacity 0.7s;
 `;
 
 export const GameDiv = styled.div`
@@ -18,8 +20,6 @@ export const GameDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
-  transition: opacity 0.7s;
 `;
 
 export const GameHangman = styled(Hangman)`
@@ -39,4 +39,6 @@ export const Control = styled.div`
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  opacity: ${({ controlState }) => (controlState === 'entered' ? 1 : 0)};
+  transition: opacity 0.5s;
 `;

@@ -5,8 +5,6 @@ const CounterContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem;
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
-  transition: opacity 2s;
 `;
 
 const CounterText = styled.p`

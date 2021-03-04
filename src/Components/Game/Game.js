@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useReducer } from 'react';
-import { Transition } from 'react-transition-group';
+import { Transition, SwitchTransition } from 'react-transition-group';
 import { GameContainer, GameDiv, GameHangman, Control } from './Game-styles';
 import { gameReducer, initialGameState } from './Game-reducer';
 import { getFilms } from '../../utils/api';
@@ -100,8 +100,8 @@ const Game = ({ canvasSize }) => {
   return (
     <Transition in={showGame} timeout={700} appear={true}>
       {(showGameState) => (
-        <GameContainer>
-          <GameDiv state={showGameState}>
+        <GameContainer state={showGameState}>
+          <GameDiv>
             <Transition in={showHangman} timeout={200} appear={true}>
               {(hangmanState) => (
                 <GameHangman
@@ -118,21 +118,24 @@ const Game = ({ canvasSize }) => {
             />
           </GameDiv>
 
-          {gameState.gameStatus === 'running' ? (
-            <Control>
-              <Counter
-                wrongGuesses={gameState.wrongGuesses}
-                state={showGameState}
-              />
-              <Keyboard handleGuess={handleGuess} />
-            </Control>
-          ) : (
-            <Result
-              gameStatus={gameState.gameStatus}
-              reset={resetGame}
-              state={showGameState}
-            />
-          )}
+          <SwitchTransition mode="out-in">
+            <Transition key={gameState.gameStatus === 'running'} timeout={500}>
+              {(controlState) =>
+                gameState.gameStatus === 'running' ? (
+                  <Control controlState={controlState}>
+                    <Counter wrongGuesses={gameState.wrongGuesses} />
+                    <Keyboard handleGuess={handleGuess} />
+                  </Control>
+                ) : (
+                  <Result
+                    gameStatus={gameState.gameStatus}
+                    reset={resetGame}
+                    controlState={controlState}
+                  />
+                )
+              }
+            </Transition>
+          </SwitchTransition>
         </GameContainer>
       )}
     </Transition>

@@ -7,7 +7,7 @@ const ResultContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
+  opacity: ${({ controlState }) => (controlState === 'entered' ? 1 : 0)};
   transition: opacity 2s;
 `;
 
@@ -21,13 +21,13 @@ const ResultText = styled.h2`
   margin-bottom: 2rem;
 `;
 
-const Result = ({ gameStatus, reset, state }) => {
+const Result = ({ gameStatus, reset, controlState }) => {
   let resultText;
   if (gameStatus === 'won') resultText = 'You survived';
   else if (gameStatus === 'lost') resultText = 'You died';
 
   return (
-    <ResultContainer state={state}>
+    <ResultContainer controlState={controlState}>
       <ResultText>{resultText}</ResultText>
       <MainButton onClick={reset} text="Play again?" />
     </ResultContainer>
