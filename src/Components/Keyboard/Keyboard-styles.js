@@ -2,14 +2,6 @@
 import styled from 'styled-components';
 import BloodSquare from '../../images/blood-square.svg';
 
-export const KeyboardDiv = styled.div`
-  grid-area: control;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 90rem;
-`;
-
 export const Keys = styled.div`
   display: flex;
   flex-flow: row wrap;

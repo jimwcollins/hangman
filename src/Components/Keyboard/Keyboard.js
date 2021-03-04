@@ -21,35 +21,33 @@ const Keyboard = ({ handleGuess }) => {
   };
 
   return (
-    <KeyboardDiv>
-      <Transition in={showKeys} timeout={500} appear={true}>
-        {(state) => (
-          <Keys state={state}>
-            {alphabet.split('').map((char) => {
-              return (
-                <>
-                  {buttonStatus.hasOwnProperty(char) ? (
-                    <Key used key={char}>
-                      {char}
-                    </Key>
-                  ) : (
-                    <Key
-                      key={char}
-                      onClick={() => {
-                        handleButton(char);
-                      }}
-                    >
-                      {char}
-                    </Key>
-                  )}
-                  {(char === 'P' || char === 'L') && <Break />}
-                </>
-              );
-            })}
-          </Keys>
-        )}
-      </Transition>
-    </KeyboardDiv>
+    <Transition in={showKeys} timeout={500} appear={true}>
+      {(state) => (
+        <Keys state={state}>
+          {alphabet.split('').map((char) => {
+            return (
+              <>
+                {buttonStatus.hasOwnProperty(char) ? (
+                  <Key used key={char}>
+                    {char}
+                  </Key>
+                ) : (
+                  <Key
+                    key={char}
+                    onClick={() => {
+                      handleButton(char);
+                    }}
+                  >
+                    {char}
+                  </Key>
+                )}
+                {(char === 'P' || char === 'L') && <Break />}
+              </>
+            );
+          })}
+        </Keys>
+      )}
+    </Transition>
   );
 };
 
