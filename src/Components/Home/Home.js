@@ -2,13 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { navigate } from '@reach/router';
 import { Transition } from 'react-transition-group';
 
-import {
-  HomeDiv,
-  Welcome,
-  HomeHangman,
-  WelcomeText,
-  WelcomeButton,
-} from './Home-styles';
+import { HomeDiv, Welcome, WelcomeText, WelcomeButton } from './Home-styles';
 
 const Home = ({ canvasSize, setGameRunning }) => {
   const [drawStage, setDrawStage] = useState(0);
@@ -42,11 +36,6 @@ const Home = ({ canvasSize, setGameRunning }) => {
     <Transition in={showWelcome} timeout={1000} appear={true}>
       {(state) => (
         <HomeDiv>
-          <HomeHangman
-            drawTo={drawStage}
-            canvasSize={canvasSize}
-            state={state}
-          />
           <Welcome>
             <WelcomeText state={state}>Want to play a game?</WelcomeText>
             <WelcomeButton

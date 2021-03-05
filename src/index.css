@@ -3,6 +3,11 @@
   src: local('Requiem'), url('./fonts/Requiem.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'Angelized';
+  src: local('Angelized'), url('./fonts/Angelized.ttf') format('truetype');
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
