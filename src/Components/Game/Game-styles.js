@@ -1,6 +1,6 @@
 // Game styles
 import styled from 'styled-components';
-import Hangman from '../Hangman';
+import Hangman from '../Hangman/Hangman';
 
 export const GameContainer = styled.div`
   display: grid;
