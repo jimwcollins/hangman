@@ -1,24 +1,32 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import BloodSpot from '../images/blood-spot.svg';
+
+const buttonAnim = keyframes`
+  0% { transform: scale(1) }
+  50% { transform: scale(1.1) }
+  100% { transform: scale(1)}
+`;
 
 const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 16rem;
-  width: 16rem;
+  height: 16.5rem;
+  width: 16.5rem;
   border: none;
   background-color: transparent;
   cursor: var(--btn-cursor);
   margin-right: 1rem;
-  opacity: 0.8;
+
   background-image: url(${BloodSpot});
   background-position: cover;
   background-repeat: no-repeat;
+  animation: ${buttonAnim} 2.5s ease infinite;
   transition: all 1s;
 
   &:hover {
+    animation-play-state: paused;
     opacity: 1;
     transform: scale(1.1);
   }
@@ -29,10 +37,12 @@ const Button = styled.button`
 `;
 
 const BtnText = styled.p`
-  margin-top: 2rem;
-  width: 25%;
+  margin-top: 2.75rem;
+  width: 100%;
   font-family: var(--font-text);
-  font-size: 2.25rem;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  text-align: center;
   color: white;
 `;
 

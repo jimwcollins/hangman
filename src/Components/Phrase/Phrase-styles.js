@@ -9,13 +9,14 @@ export const PhraseContainer = styled.p`
   line-height: 1.7;
   letter-spacing: 1.5em;
   margin-bottom: 3rem;
+  margin-right: 3rem;
   transition: all 1s;
 `;
 
 export const PhraseLetter = styled.span`
   position: relative;
   font-family: var(--font-display);
-  font-size: 6rem;
+  font-size: 7rem;
   color: ${({ correct }) =>
     correct ? 'var(--color-text)' : 'var(--color-main)'};
   margin: ${({ space }) => (space ? '0 1rem' : '0 0.5rem')};

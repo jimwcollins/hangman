@@ -15,9 +15,9 @@ const AppContainer = styled.div`
   position: relative;
   display: grid;
   grid-template-columns:
-    minmax(10rem, 1fr)
+    minmax(9rem, 1fr)
     minmax(min-content, 114rem)
-    minmax(10rem, 1fr);
+    minmax(9rem, 1fr);
   grid-template-rows: min-content 1fr;
   grid-template-areas: '. header .' '. app .';
   align-items: center;

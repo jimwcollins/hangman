@@ -9,7 +9,7 @@ const CounterContainer = styled.div`
 
 const CounterText = styled.p`
   font-family: var(--font-display);
-  font-size: 1.6rem;
+  font-size: 2.5rem;
   color: white;
   text-transform: uppercase;
   margin-top: 1.7rem;
@@ -19,15 +19,16 @@ const CounterNum = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 9rem;
-  width: 9rem;
+  height: 10.5rem;
+  width: 10.5rem;
+  padding-top: 0.5rem;
   background-image: url(${BloodSpot});
   background-position: cover;
   background-repeat: no-repeat;
 `;
 
 const CounterTextNum = styled(CounterText)`
-  font-size: 2.5rem;
+  font-size: 4.5rem;
 `;
 
 const Counter = ({ wrongGuesses, state }) => {

@@ -4,7 +4,6 @@ import { SwitchTransition, Transition } from 'react-transition-group';
 import { PhraseContainer, PhraseLetter, PhraseSpace } from './Phrase-styles';
 
 const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
-  const [showPhrase] = useState(true);
   const [phraseState, setPhraseState] = useState({});
   const [losingState, setLosingState] = useState({});
 

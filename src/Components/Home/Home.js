@@ -26,7 +26,7 @@ const Home = ({ setGameRunning }) => {
           <Welcome>
             <WelcomeText state={state}>Want to play a game?</WelcomeText>
             <WelcomeButton
-              text="Hell, yeah!"
+              text="Begin"
               state={state}
               onClick={() => startGame()}
             />
