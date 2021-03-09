@@ -17,8 +17,8 @@ export const Keys = styled.div`
 export const Key = styled.button`
   margin: 0.5rem;
   padding: 0.5rem;
-  width: 5.75rem;
-  height: 5.25rem;
+  width: 6rem;
+  height: 5.5rem;
   border: none;
   border-radius: 0.5rem;
   background-image: url(${BloodSquare});
@@ -26,7 +26,7 @@ export const Key = styled.button`
   background-repeat: no-repeat;
   background-color: transparent;
   font-family: var(--font-text);
-  font-size: 2.25rem;
+  font-size: 3rem;
   color: var(--color-text);
   opacity: ${({ used }) => (used ? 0.5 : 1)};
   cursor: ${({ used }) => (used ? '' : 'var(--btn-cursor)')};

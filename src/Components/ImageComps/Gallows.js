@@ -5,8 +5,8 @@ import gallows from '../../images/Gallows.png';
 const GallowsImg = styled.img`
   position: absolute;
   top: 0rem;
-  right: ${({ gameRunning }) => (gameRunning ? '-5rem' : '0rem')};
-  height: ${({ gameRunning }) => (gameRunning ? '90rem' : '120rem')};
+  right: ${({ gameRunning }) => (gameRunning ? '-5rem' : '-5rem')};
+  height: ${({ gameRunning }) => (gameRunning ? '92vh' : '110vh')};
   transition: all 1s ease;
 `;
 

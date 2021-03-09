@@ -6,7 +6,7 @@ const MoonImg = styled.img`
   position: absolute;
   top: -30rem;
   right: -30rem;
-  height: ${({ gameRunning }) => (gameRunning ? '75rem' : '85rem')};
+  height: ${({ gameRunning }) => (gameRunning ? '70vh' : '85vh')};
   transition: height 3s ease;
 `;
 

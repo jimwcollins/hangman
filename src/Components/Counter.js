@@ -19,9 +19,8 @@ const CounterNum = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 10.5rem;
-  width: 10.5rem;
-  padding-top: 0.5rem;
+  height: 10rem;
+  width: 10rem;
   background-image: url(${BloodSpot});
   background-position: cover;
   background-repeat: no-repeat;
