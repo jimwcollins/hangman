@@ -20,6 +20,7 @@ const Game = ({ canvasSize }) => {
   const [startGame, setStartGame] = useState(true);
   const [maxErrors] = useState(10);
   const [showHangman, setShowHangman] = useState(false);
+  const [wrongGuess, setWrongGuess] = useState(false);
 
   // Only fetch films when we first load the app
   // Or we've used all films in current batch (i.e. phrase bank is empty)
@@ -67,7 +68,10 @@ const Game = ({ canvasSize }) => {
 
     if (correctLetters.length === 0) {
       if (gameState.wrongGuesses === 0) setShowHangman(true);
-      dispatchGame({ type: 'WRONG_GUESS', maxErrors });
+      setWrongGuess(true);
+      setTimeout(() => {
+        dispatchGame({ type: 'WRONG_GUESS', maxErrors });
+      }, 200);
     } else {
       dispatchGame({ type: 'CORRECT_GUESS', correctLetters });
     }
@@ -120,7 +124,11 @@ const Game = ({ canvasSize }) => {
                 gameState.gameStatus === 'running' ? (
                   <Control controlState={controlState}>
                     <Counter wrongGuesses={gameState.wrongGuesses} />
-                    <Keyboard handleGuess={handleGuess} />
+                    <Keyboard
+                      handleGuess={handleGuess}
+                      wrongGuess={wrongGuess}
+                      setWrongGuess={setWrongGuess}
+                    />
                   </Control>
                 ) : (
                   <Result

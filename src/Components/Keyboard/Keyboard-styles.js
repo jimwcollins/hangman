@@ -1,6 +1,14 @@
 // Keyboard styles
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import BloodSquare from '../../images/blood-square.svg';
+
+const keysShake = keyframes`
+  0% { transform: translateX(0) }
+  25% { transform: translateX(-1rem) }
+  50% { transform: translateX(0)  }
+  75% { transform: translateX(1rem)  }
+  100% { transform: translateX(0) }
+`;
 
 export const Keys = styled.div`
   display: flex;
@@ -12,6 +20,10 @@ export const Keys = styled.div`
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(3rem)'};
   transition: all 0.5s;
+
+  &.enter-active {
+    animation: ${keysShake} 0.2s ease;
+  }
 `;
 
 export const Key = styled.button`
