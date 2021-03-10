@@ -23,7 +23,7 @@ export const Welcome = styled.div`
 export const WelcomeText = styled.h2`
   text-align: center;
   font-family: var(--font-display);
-  font-size: 7rem;
+  font-size: 8rem;
   color: var(--color-text);
   letter-spacing: 0.2rem;
   margin-bottom: 4rem;

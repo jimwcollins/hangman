@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AnimCanvas from './AnimCanvas';
 
 const drawStages = [
@@ -15,7 +15,9 @@ const drawStages = [
   { moveTo: [250, 150], line: [50, 75] }, // Arm 2
 ];
 
-const Hangman = ({ drawTo, canvasSize, className }) => {
+const Hangman = ({ drawTo, className }) => {
+  const [canvasSize] = useState({ width: 360, height: 410 });
+
   // The draw function draws each stage depending on data from the drawStage array
   // and the current stage, provided by the main game or by the animation useEffect on home page
   // We pass this to be drawn by our AnimCanvas component

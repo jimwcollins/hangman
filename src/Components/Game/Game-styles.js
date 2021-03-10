@@ -5,7 +5,7 @@ import Hangman from '../Hangman/Hangman';
 export const GameContainer = styled.div`
   display: grid;
   height: 100%;
-  grid-template-rows: 56% 44%;
+  grid-template-rows: 60% 40%;
   grid-template-areas: 'game' 'control';
   column-gap: 5rem;
   justify-items: center;
@@ -23,13 +23,15 @@ export const GameDiv = styled.div`
 `;
 
 export const GameHangman = styled(Hangman)`
-  width: 100%;
   height: 100%;
-  flex: 0;
-  right: 0;
+  max-height: 60rem;
+  align-self: flex-end;
+  flex: ${({ state }) => (state === 'entered' ? 1 : 0)};
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   width: ${({ state }) => (state === 'entered' ? '100%' : '0%')};
-  transition: all 1s;
+  padding-right: 2rem;
+  align-self: center;
+  transition: all 0.5s ease;
 `;
 
 export const Control = styled.div`

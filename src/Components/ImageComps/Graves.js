@@ -16,7 +16,7 @@ const GraveLeft = styled.img`
   position: absolute;
   left: 0rem;
   bottom: 0rem;
-  height: 15rem;
+  height: 20rem;
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(30rem)'};
   transition: transform 1s cubic-bezier(0.2, 0.33, 0.69, 1.46);
@@ -25,9 +25,9 @@ const GraveLeft = styled.img`
 
 const GraveMid = styled.img`
   position: absolute;
-  left: 7rem;
+  left: 10rem;
   bottom: 0rem;
-  height: 25rem;
+  height: 30rem;
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(30rem)'};
   transition: transform 1s cubic-bezier(0.2, 0.33, 0.69, 1.46);
@@ -35,9 +35,9 @@ const GraveMid = styled.img`
 
 const GraveRight = styled.img`
   position: absolute;
-  left: 20rem;
+  left: 25rem;
   bottom: 0rem;
-  height: 10rem;
+  height: 15rem;
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(30rem)'};
   transition: transform 1s cubic-bezier(0.2, 0.33, 0.69, 1.46);

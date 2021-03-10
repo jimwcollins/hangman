@@ -11,7 +11,7 @@ import Keyboard from '../Keyboard/Keyboard';
 import Result from '../Result';
 import LoadSpinner from '../LoadSpinner';
 
-const Game = ({ canvasSize }) => {
+const Game = () => {
   const [phraseBank, setPhraseBank] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPhrase, setCurrentPhrase] = useState([]);
@@ -71,7 +71,7 @@ const Game = ({ canvasSize }) => {
       setWrongGuess(true);
       setTimeout(() => {
         dispatchGame({ type: 'WRONG_GUESS', maxErrors });
-      }, 200);
+      }, 500);
     } else {
       dispatchGame({ type: 'CORRECT_GUESS', correctLetters });
     }
@@ -102,11 +102,10 @@ const Game = ({ canvasSize }) => {
       {(showGameState) => (
         <GameContainer state={showGameState}>
           <GameDiv>
-            <Transition in={showHangman} timeout={1000} appear={true}>
+            <Transition in={showHangman} timeout={500} appear={true}>
               {(hangmanState) => (
                 <GameHangman
                   drawTo={gameState.wrongGuesses}
-                  canvasSize={canvasSize}
                   state={hangmanState}
                 />
               )}

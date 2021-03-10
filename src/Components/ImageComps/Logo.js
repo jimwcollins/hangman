@@ -1,7 +1,7 @@
 import React from 'react';
 import { navigate } from '@reach/router';
 import styled from 'styled-components';
-import logo from '../../images/Logo_White.png';
+import logo from '../../images/Logo.png';
 
 const MainLogo = styled.img`
   grid-area: header;

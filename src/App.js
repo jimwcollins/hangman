@@ -15,9 +15,9 @@ const AppContainer = styled.div`
   position: relative;
   display: grid;
   grid-template-columns:
-    minmax(9rem, 1fr)
-    minmax(min-content, 114rem)
-    minmax(9rem, 1fr);
+    minmax(10rem, 1fr)
+    minmax(min-content, 160rem)
+    minmax(10rem, 1fr);
   grid-template-rows: min-content 1fr;
   grid-template-areas: '. header .' '. app .';
   align-items: center;
@@ -29,13 +29,12 @@ const AppContainer = styled.div`
 
 const GameRouter = styled(Router)`
   grid-area: app;
-  height: 93%;
-  width: 100%;
+  height: 100%;
+  overflow: hidden;
 `;
 
 // Component
 const App = () => {
-  const [canvasSize] = useState({ width: 400, height: 410 });
   const [gameRunning, setGameRunning] = useState(false);
 
   return (
@@ -46,12 +45,8 @@ const App = () => {
       <Graves />
 
       <GameRouter>
-        <Home
-          path="/"
-          canvasSize={canvasSize}
-          setGameRunning={setGameRunning}
-        />
-        <Game path="/game" canvasSize={canvasSize} />
+        <Home path="/" setGameRunning={setGameRunning} />
+        <Game path="/game" />
       </GameRouter>
     </AppContainer>
   );

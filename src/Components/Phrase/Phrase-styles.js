@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import bloodLine from '../../images/blood-swash.svg';
 
 export const PhraseContainer = styled.p`
-  width: 60%;
+  flex: 2;
   overflow-wrap: normal;
   text-align: center;
   line-height: 1.7;
-  letter-spacing: 1.5em;
+  letter-spacing: 1em;
   margin-bottom: 3rem;
-  margin-right: 3rem;
+  margin: 0rem 2rem;
   transition: all 1s;
 `;
 
@@ -31,7 +31,7 @@ export const PhraseSpace = styled.span`
   position: relative;
   font-family: var(--font-display);
   font-size: 6rem;
-  letter-spacing: 0.6em;
+  letter-spacing: 0.7em;
   color: var(--color-main);
   margin: 0 0.5rem;
   top: 0.25rem;
