@@ -1,16 +1,21 @@
-// Game styles
 import styled from 'styled-components';
+import { breakpoints } from '../../breakpoints';
+
 import Hangman from '../Hangman/Hangman';
 
 export const GameContainer = styled.div`
   display: grid;
   height: 100%;
-  grid-template-rows: 60% 40%;
+  grid-template-rows: 55% 45%;
   grid-template-areas: 'game' 'control';
   column-gap: 5rem;
   justify-items: center;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transition: opacity 0.7s;
+
+  @media ${breakpoints.deskLg.height} {
+    grid-template-rows: 65% 35%;
+  }
 `;
 
 export const GameDiv = styled.div`
@@ -24,7 +29,7 @@ export const GameDiv = styled.div`
 
 export const GameHangman = styled(Hangman)`
   height: 100%;
-  max-height: 60rem;
+  max-height: 50rem;
   align-self: flex-end;
   flex: ${({ state }) => (state === 'entered' ? 1 : 0)};
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
@@ -32,6 +37,18 @@ export const GameHangman = styled(Hangman)`
   padding-right: 2rem;
   align-self: center;
   transition: all 0.5s ease;
+
+  @media ${breakpoints.deskLg.width} {
+    max-height: 60rem;
+  }
+
+  @media ${breakpoints.deskMed.width} {
+    max-height: 45rem;
+  }
+
+  @media ${breakpoints.deskSml.width} {
+    max-height: 38rem;
+  }
 `;
 
 export const Control = styled.div`

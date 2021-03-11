@@ -3,7 +3,7 @@ import { SwitchTransition, Transition } from 'react-transition-group';
 
 import { PhraseContainer, PhraseLetter, PhraseSpace } from './Phrase-styles';
 
-const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
+const Phrase = ({ newPhrase, correctGuesses, gameStatus, showHangman }) => {
   const [phraseState, setPhraseState] = useState({});
   const [losingState, setLosingState] = useState({});
 
@@ -76,7 +76,7 @@ const Phrase = ({ newPhrase, correctGuesses, gameStatus }) => {
     );
   });
 
-  return <PhraseContainer>{phrase}</PhraseContainer>;
+  return <PhraseContainer showHangman={showHangman}>{phrase}</PhraseContainer>;
 };
 
 export default Phrase;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Router } from '@reach/router';
 import styled from 'styled-components';
 import './App.css';
+import { breakpoints } from './breakpoints';
 
 import Logo from './Components/ImageComps/Logo';
 import Moon from './Components/ImageComps/Moon';
@@ -16,7 +17,7 @@ const AppContainer = styled.div`
   display: grid;
   grid-template-columns:
     minmax(10rem, 1fr)
-    minmax(min-content, 160rem)
+    minmax(min-content, 140rem)
     minmax(10rem, 1fr);
   grid-template-rows: min-content 1fr;
   grid-template-areas: '. header .' '. app .';
@@ -25,6 +26,20 @@ const AppContainer = styled.div`
   width: 100%;
   background-color: var(--color-black);
   overflow: hidden;
+
+  @media ${breakpoints.deskSml.width} {
+    grid-template-columns:
+      minmax(3rem, 1fr)
+      minmax(min-content, 130rem)
+      minmax(3rem, 1fr);
+  }
+
+  @media ${breakpoints.deskLg.width} {
+    grid-template-columns:
+      minmax(10rem, 1fr)
+      minmax(min-content, 180rem)
+      minmax(10rem, 1fr);
+  }
 `;
 
 const GameRouter = styled(Router)`

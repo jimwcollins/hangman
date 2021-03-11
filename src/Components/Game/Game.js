@@ -114,6 +114,7 @@ const Game = () => {
               newPhrase={currentPhrase}
               correctGuesses={gameState.correctGuesses}
               gameStatus={gameState.gameStatus}
+              showHangman={showHangman}
             />
           </GameDiv>
 

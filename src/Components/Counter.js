@@ -5,6 +5,7 @@ const CounterContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 1rem;
+  margin-top: 0.5rem;
 `;
 
 const CounterText = styled.p`

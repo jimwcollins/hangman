@@ -1,5 +1,6 @@
 // Keyboard styles
 import styled, { keyframes } from 'styled-components';
+import { breakpoints } from '../../breakpoints';
 import BloodSquare from '../../images/blood-square.svg';
 
 const keysShake = keyframes`
@@ -16,6 +17,7 @@ export const Keys = styled.div`
   justify-content: center;
   align-content: space-between;
   width: 100%;
+  margin-bottom: 3rem;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(3rem)'};
@@ -50,6 +52,18 @@ export const Key = styled.button`
 
   &:focus {
     outline: none;
+  }
+
+  @media ${breakpoints.deskLg.height} {
+    width: 7.25rem;
+    height: 6rem;
+    font-size: 3.5rem;
+  }
+
+  @media ${breakpoints.tabletLand.width} {
+    width: 5.5rem;
+    height: 5rem;
+    font-size: 2.5rem;
   }
 `;
 
