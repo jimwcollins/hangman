@@ -31,12 +31,14 @@ const CounterTextNum = styled(CounterText)`
   font-size: 4.5rem;
 `;
 
-const Counter = ({ wrongGuesses, state }) => {
+const Counter = ({ wrongGuesses, state, maxErrors }) => {
   return (
     <CounterContainer state={state}>
       <CounterText className="counter">Guesses</CounterText>
       <CounterNum>
-        <CounterTextNum className="counter">{10 - wrongGuesses}</CounterTextNum>
+        <CounterTextNum className="counter">
+          {maxErrors - wrongGuesses}
+        </CounterTextNum>
       </CounterNum>
       <CounterText className="counter">remaining</CounterText>
     </CounterContainer>

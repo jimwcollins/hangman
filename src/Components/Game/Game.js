@@ -18,7 +18,7 @@ const Game = () => {
   const [currentPhraseIndex, setCurrentPhraseIndex] = useState();
   const [gameState, dispatchGame] = useReducer(gameReducer, initialGameState);
   const [startGame, setStartGame] = useState(true);
-  const [maxErrors] = useState(10);
+  const [maxErrors] = useState(12);
   const [showHangman, setShowHangman] = useState(false);
   const [wrongGuess, setWrongGuess] = useState(false);
 
@@ -102,14 +102,16 @@ const Game = () => {
       {(showGameState) => (
         <GameContainer state={showGameState}>
           <GameDiv>
-            <Transition in={showHangman} timeout={500} appear={true}>
-              {(hangmanState) => (
-                <GameHangman
-                  drawTo={gameState.wrongGuesses}
-                  state={hangmanState}
-                />
-              )}
-            </Transition>
+            {showHangman && (
+              <Transition in={showHangman} timeout={500} appear={true}>
+                {(hangmanState) => (
+                  <GameHangman
+                    drawTo={gameState.wrongGuesses}
+                    state={hangmanState}
+                  />
+                )}
+              </Transition>
+            )}
             <Phrase
               newPhrase={currentPhrase}
               correctGuesses={gameState.correctGuesses}
@@ -123,7 +125,10 @@ const Game = () => {
               {(controlState) =>
                 gameState.gameStatus === 'running' ? (
                   <Control controlState={controlState}>
-                    <Counter wrongGuesses={gameState.wrongGuesses} />
+                    <Counter
+                      wrongGuesses={gameState.wrongGuesses}
+                      maxErrors={maxErrors}
+                    />
                     <Keyboard
                       handleGuess={handleGuess}
                       wrongGuess={wrongGuess}
