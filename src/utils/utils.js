@@ -10,8 +10,10 @@ export const filterPhrases = (phrases) => {
 };
 
 export const checkPhrase = (phrase) => {
+  if (phrase.length > 35 || phrase.length === 0) return false;
+
   // If the phrase contains numbers, reject it
   const checkNums = /[\d]/g;
 
-  return checkNums.test(phrase) || phrase.length === 0 ? false : true;
+  return checkNums.test(phrase) ? false : true;
 };

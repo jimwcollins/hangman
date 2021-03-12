@@ -91,7 +91,7 @@ describe('Test formatPhrase()', () => {
   });
 });
 
-describe.only('Test filterPhrases()', () => {
+describe('Test filterPhrases()', () => {
   it('should return empty array for empty array', () => {
     const inputArray = [];
     const expectedOutput = [];
@@ -138,7 +138,7 @@ describe.only('Test filterPhrases()', () => {
   });
 });
 
-describe('Test checkPhrase()', () => {
+describe.only('Test checkPhrase()', () => {
   it('should reject empty string', () => {
     const inputPhrase = '';
     const expectedOutput = false;
@@ -171,6 +171,28 @@ describe('Test checkPhrase()', () => {
     expect(actualOutput).toBe(expectedOutput);
 
     const inputPhrase2 = '28 Days Later';
+    const expectedOutput2 = false;
+    const actualOutput2 = checkPhrase(inputPhrase2);
+    console.log(actualOutput2);
+    expect(actualOutput2).toBe(expectedOutput2);
+  });
+
+  it('should reject phrase of excessive length', () => {
+    const inputPhrase = 'Sweeney Todd The Demon Barber of Fleet Street';
+    const expectedOutput = false;
+    const actualOutput = checkPhrase(inputPhrase);
+    console.log(actualOutput);
+    expect(actualOutput).toBe(expectedOutput);
+  });
+
+  it('should allows phrases of 35 but no more', () => {
+    const inputPhrase = 'Sweeney Todd The Demon Barber of Oz';
+    const expectedOutput = true;
+    const actualOutput = checkPhrase(inputPhrase);
+    console.log(actualOutput);
+    expect(actualOutput).toBe(expectedOutput);
+
+    const inputPhrase2 = 'Sweeney Todd The Demon Barber of Rye';
     const expectedOutput2 = false;
     const actualOutput2 = checkPhrase(inputPhrase2);
     console.log(actualOutput2);
