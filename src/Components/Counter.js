@@ -7,6 +7,7 @@ const CounterContainer = styled.div`
   align-items: center;
   padding: 1rem;
   margin-top: 0.5rem;
+  cursor: default;
 
   @media ${breakpoints.phoneLand.height} {
     display: none;
@@ -20,6 +21,10 @@ const CounterText = styled.p`
   text-transform: uppercase;
   margin-top: 1.7rem;
 
+  @media ${breakpoints.deskLg.width} {
+    font-size: 2.8rem;
+  }
+
   @media ${breakpoints.phoneSm.width} {
     font-size: 1.5rem;
     margin-top: 1.7rem;
@@ -32,9 +37,15 @@ const CounterNum = styled.div`
   justify-content: center;
   height: 10rem;
   width: 10rem;
+  margin: 0 0.75rem 0 0.9rem;
   background-image: url(${BloodSpot});
   background-size: cover;
   background-repeat: no-repeat;
+
+  @media ${breakpoints.deskLg.width} {
+    height: 11rem;
+    width: 11rem;
+  }
 
   @media ${breakpoints.phoneSm.width} {
     height: 8rem;
@@ -43,7 +54,14 @@ const CounterNum = styled.div`
 `;
 
 const CounterTextNum = styled(CounterText)`
+  font-family: var(--font-display);
   font-size: 4.5rem;
+  padding-top: 0.2rem;
+
+  @media ${breakpoints.deskLg.width} {
+    font-size: 4.75rem;
+    padding-top: 0.5rem;
+  }
 
   @media ${breakpoints.phoneSm.width} {
     font-size: 3rem;

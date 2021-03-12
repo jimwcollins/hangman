@@ -12,7 +12,7 @@ body {
   --color-text: rgb(238, 230, 230);
   --color-black: rgb(4, 4, 4);
   --font-display: 'Angelized', serif;
-  --font-text: 'Angelized', serif;
+  --font-text: 'Josefin', sans-serif;
   --btn-cursor: url('/src/icons/skeleton-cursor.png'), pointer;
 }
 

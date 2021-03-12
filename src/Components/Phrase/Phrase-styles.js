@@ -9,8 +9,11 @@ export const PhraseContainer = styled.p`
   line-height: 1.7;
   letter-spacing: 1em;
   margin-bottom: 2rem;
-  padding: 0 12rem;
+  padding-left: 12rem;
+  padding-right: ${({ showHangman }) => (showHangman ? '15rem' : '12rem')};
+  cursor: default;
   transition: all 1s ease-in-out;
+  transition-delay: 0.5s;
 `;
 
 export const PhraseLetter = styled.span`

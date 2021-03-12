@@ -17,7 +17,7 @@ export const Keys = styled.div`
   justify-content: center;
   align-content: space-between;
   width: 100%;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(3rem)'};
@@ -43,7 +43,7 @@ export const Key = styled.button`
   background-position: cover;
   background-repeat: no-repeat;
   background-color: transparent;
-  font-family: var(--font-text);
+  font-family: var(--font-display);
   font-size: 3rem;
   color: var(--color-text);
   opacity: ${({ used }) => (used ? 0.5 : 1)};
@@ -59,8 +59,8 @@ export const Key = styled.button`
   }
 
   @media ${breakpoints.deskLg.height} {
-    width: 7.25rem;
-    height: 6rem;
+    width: 7.5rem;
+    height: 6.5rem;
     font-size: 3.5rem;
   }
 

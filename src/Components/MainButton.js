@@ -39,7 +39,7 @@ const Button = styled.button`
 const BtnText = styled.p`
   margin-top: 2.75rem;
   width: 100%;
-  font-family: var(--font-text);
+  font-family: var(--font-display);
   font-size: 2.5rem;
   text-transform: uppercase;
   text-align: center;

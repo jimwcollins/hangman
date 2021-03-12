@@ -37,7 +37,7 @@ const AppContainer = styled.div`
   @media ${breakpoints.deskLg.width} {
     grid-template-columns:
       minmax(10rem, 1fr)
-      minmax(min-content, 180rem)
+      minmax(min-content, 175rem)
       minmax(10rem, 1fr);
   }
 

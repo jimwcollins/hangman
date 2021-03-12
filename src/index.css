@@ -1,6 +1,6 @@
 @font-face {
-  font-family: 'Requiem';
-  src: local('Requiem'), url('./fonts/Requiem.ttf') format('truetype');
+  font-family: 'Josefin';
+  src: local('Josefin'), url('./fonts/JosefinSlab-Bold.ttf') format('truetype');
 }
 
 @font-face {
