@@ -30,8 +30,16 @@ export const PhraseLetter = styled.span`
     font-size: 7.5rem;
   }
 
-  @media ${breakpoints.tabletLand.width} {
+  @media ${breakpoints.tabletLg.width} {
     font-size: 4.5rem;
+  }
+
+  @media ${breakpoints.phoneLand.height} {
+    font-size: 3rem;
+  }
+
+  @media ${breakpoints.phoneSm.width} {
+    font-size: 3rem;
   }
 `;
 
@@ -55,7 +63,15 @@ export const PhraseSpace = styled.span`
     font-size: 7.5rem;
   }
 
-  @media ${breakpoints.tabletLand.width} {
+  @media ${breakpoints.tabletLg.width} {
     font-size: 4.5rem;
+  }
+
+  @media ${breakpoints.phoneLand.height} {
+    font-size: 3rem;
+  }
+
+  @media ${breakpoints.phoneSm.width} {
+    font-size: 3.5rem;
   }
 `;

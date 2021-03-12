@@ -1,5 +1,7 @@
 // Home styles
 import styled from 'styled-components';
+import { breakpoints } from '../../breakpoints';
+
 import MainButton from '../MainButton';
 
 export const HomeDiv = styled.div`
@@ -31,6 +33,11 @@ export const WelcomeText = styled.h2`
   transform: ${({ state }) =>
     state === 'entered' ? 'translateY(0rem)' : 'translateY(-3rem)'};
   transition: all 1s;
+
+  @media ${breakpoints.phoneSm.width} {
+    margin: 3rem 0 2rem 0;
+    font-size: 6rem;
+  }
 `;
 
 export const WelcomeButton = styled(MainButton)`

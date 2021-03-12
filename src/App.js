@@ -40,6 +40,13 @@ const AppContainer = styled.div`
       minmax(min-content, 180rem)
       minmax(10rem, 1fr);
   }
+
+  @media ${breakpoints.phoneSm.width} {
+    grid-template-columns:
+      minmax(1rem, 1fr)
+      min-content
+      minmax(1rem, 1fr);
+  }
 `;
 
 const GameRouter = styled(Router)`

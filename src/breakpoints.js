@@ -1,6 +1,15 @@
 export const breakpoints = {
-  tabletLand: {
-    width: '(max-width: 1025px)',
+  phoneSm: {
+    width: '(max-width: 414px)',
+  },
+  phoneLand: {
+    height: '(max-height: 375px)',
+  },
+  tabletSm: {
+    width: '(max-width: 1000px)',
+  },
+  tabletLg: {
+    width: '(max-width: 1125px)',
   },
   deskSml: {
     width: '(max-width: 1300px)',

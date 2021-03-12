@@ -1,6 +1,7 @@
 import React from 'react';
 import { navigate } from '@reach/router';
 import styled from 'styled-components';
+import { breakpoints } from '../../breakpoints';
 import logo from '../../images/Logo.png';
 
 const MainLogo = styled.img`
@@ -10,6 +11,15 @@ const MainLogo = styled.img`
   padding: 5rem 3rem 3rem 3rem;
   cursor: pointer;
   transition: height 1s;
+
+  @media ${breakpoints.tabletSm.width} {
+    height: ${({ gameRunning }) => (!gameRunning ? '20rem' : '10rem')};
+    padding: 2rem 0;
+  }
+
+  @media ${breakpoints.phoneLand.height} {
+    display: none;
+  }
 `;
 
 const Logo = ({ gameRunning, setGameRunning }) => {

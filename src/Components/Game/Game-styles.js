@@ -8,13 +8,15 @@ export const GameContainer = styled.div`
   height: 100%;
   grid-template-rows: 55% 45%;
   grid-template-areas: 'game' 'control';
-  column-gap: 5rem;
-  justify-items: center;
   opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   transition: opacity 0.7s;
 
   @media ${breakpoints.deskLg.height} {
     grid-template-rows: 65% 35%;
+  }
+
+  @media ${breakpoints.phoneLand.height} {
+    grid-template-rows: 58% 42%;
   }
 `;
 
@@ -25,6 +27,14 @@ export const GameDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media ${breakpoints.tabletLg.width} {
+    flex-direction: column;
+  }
+
+  @media ${breakpoints.phoneLand.height} {
+    flex-direction: row;
+  }
 `;
 
 export const GameHangman = styled(Hangman)`
@@ -49,8 +59,32 @@ export const GameHangman = styled(Hangman)`
   }
 
   @media ${breakpoints.deskSml.width} {
+    max-height: 36rem;
+    max-width: 28rem;
+  }
+
+  @media ${breakpoints.tabletLg.width} {
     max-height: 38rem;
     max-width: 30rem;
+    margin-bottom: 10rem;
+  }
+
+  @media ${breakpoints.tabletSm.width} {
+    max-height: 28rem;
+    max-width: 22rem;
+    margin-bottom: 8rem;
+  }
+
+  @media ${breakpoints.phoneSm.width} {
+    max-height: 20rem;
+    max-width: 18rem;
+    margin-bottom: 5rem;
+  }
+
+  @media ${breakpoints.phoneLand.height} {
+    max-height: 18rem;
+    max-width: 16rem;
+    margin-bottom: 0rem;
   }
 `;
 

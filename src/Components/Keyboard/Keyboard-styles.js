@@ -26,6 +26,10 @@ export const Keys = styled.div`
   &.enter-active {
     animation: ${keysShake} 0.2s ease;
   }
+
+  @media ${breakpoints.phoneLand.height} {
+    margin-bottom: 0.2rem;
+  }
 `;
 
 export const Key = styled.button`
@@ -60,10 +64,26 @@ export const Key = styled.button`
     font-size: 3.5rem;
   }
 
-  @media ${breakpoints.tabletLand.width} {
+  @media ${breakpoints.tabletLg.width} {
     width: 5.5rem;
     height: 5rem;
     font-size: 2.5rem;
+  }
+
+  @media ${breakpoints.phoneSm.width} {
+    width: 3rem;
+    height: 3.5rem;
+    margin: 0.1rem;
+    padding: 0.1rem;
+    font-size: 1.75rem;
+  }
+
+  @media ${breakpoints.phoneLand.height} {
+    width: 4.5rem;
+    height: 3.5rem;
+    margin: 0.2rem;
+    padding-top: 0.6rem;
+    font-size: 2.25rem;
   }
 `;
 
