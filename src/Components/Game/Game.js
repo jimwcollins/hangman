@@ -71,7 +71,7 @@ const Game = () => {
       setWrongGuess(true);
       setTimeout(() => {
         dispatchGame({ type: 'WRONG_GUESS', maxErrors });
-      }, 500);
+      }, 750);
     } else {
       dispatchGame({ type: 'CORRECT_GUESS', correctLetters });
     }
@@ -103,7 +103,7 @@ const Game = () => {
         <GameContainer state={showGameState}>
           <GameDiv>
             {showHangman && (
-              <Transition in={showHangman} timeout={500} appear={true}>
+              <Transition in={showHangman} timeout={750} appear={true}>
                 {(hangmanState) => (
                   <GameHangman
                     drawTo={gameState.wrongGuesses}
@@ -116,7 +116,6 @@ const Game = () => {
               newPhrase={currentPhrase}
               correctGuesses={gameState.correctGuesses}
               gameStatus={gameState.gameStatus}
-              showHangman={showHangman}
             />
           </GameDiv>
 

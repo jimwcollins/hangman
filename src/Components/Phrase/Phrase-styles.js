@@ -4,13 +4,12 @@ import bloodLine from '../../images/blood-swash.svg';
 import { breakpoints } from '../../breakpoints';
 
 export const PhraseContainer = styled.p`
-  flex: 2;
   overflow-wrap: normal;
   text-align: center;
   line-height: 1.7;
   letter-spacing: 1em;
   margin-bottom: 2rem;
-  padding-right: ${({ showHangman }) => (showHangman ? '12rem' : '0rem')};
+  padding: 0 12rem;
   transition: all 1s ease-in-out;
 `;
 

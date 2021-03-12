@@ -29,25 +29,28 @@ export const GameDiv = styled.div`
 
 export const GameHangman = styled(Hangman)`
   height: 100%;
-  max-height: 50rem;
+  width: auto;
+  max-height: 46rem;
+  max-width: 40rem;
   align-self: flex-end;
-  flex: ${({ state }) => (state === 'entered' ? 1 : 0)};
-  opacity: ${({ state }) => (state === 'entered' ? 1 : 0)};
   width: ${({ state }) => (state === 'entered' ? '100%' : '0%')};
-  padding-right: 2rem;
+  opacity: ${({ state }) => (state === 'entered' ? '1' : '0')};
   align-self: center;
-  transition: all 0.5s ease;
+  transition: all 0.75s ease-in-out;
 
   @media ${breakpoints.deskLg.width} {
-    max-height: 60rem;
+    max-height: 68rem;
+    max-width: 60rem;
   }
 
   @media ${breakpoints.deskMed.width} {
-    max-height: 45rem;
+    max-height: 48rem;
+    max-width: 40rem;
   }
 
   @media ${breakpoints.deskSml.width} {
     max-height: 38rem;
+    max-width: 30rem;
   }
 `;
 
