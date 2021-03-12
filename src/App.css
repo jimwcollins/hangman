@@ -13,7 +13,7 @@ body {
   --color-black: rgb(4, 4, 4);
   --font-display: 'Angelized', serif;
   --font-text: 'Angelized', serif;
-  --btn-cursor: url('../src/icons/cursor.cur'), auto;
+  --btn-cursor: url('/src/icons/skeleton-cursor.png'), pointer;
 }
 
 html {

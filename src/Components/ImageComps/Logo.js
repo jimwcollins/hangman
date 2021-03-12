@@ -9,7 +9,7 @@ const MainLogo = styled.img`
   justify-self: center;
   height: ${({ gameRunning }) => (!gameRunning ? '35rem' : '15rem')};
   padding: 5rem 3rem 3rem 3rem;
-  cursor: pointer;
+  cursor: var(--btn-cursor);
   transition: height 1s;
 
   @media ${breakpoints.tabletSm.width} {
