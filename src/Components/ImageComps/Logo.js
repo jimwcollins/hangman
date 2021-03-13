@@ -8,9 +8,14 @@ const MainLogo = styled.img`
   grid-area: header;
   justify-self: center;
   height: ${({ gameRunning }) => (!gameRunning ? '35rem' : '15rem')};
-  padding: 5rem 3rem 3rem 3rem;
+  padding: 6rem 3rem 3rem 3rem;
   cursor: var(--btn-cursor);
   transition: height 1s;
+
+  @media ${breakpoints.deskLg.width} {
+    height: ${({ gameRunning }) => (!gameRunning ? '42rem' : '18rem')};
+    padding-top: 7rem;
+  }
 
   @media ${breakpoints.tabletSm.width} {
     height: ${({ gameRunning }) => (!gameRunning ? '20rem' : '10rem')};

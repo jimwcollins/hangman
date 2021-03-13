@@ -55,12 +55,14 @@ const CounterNum = styled.div`
 
 const CounterTextNum = styled(CounterText)`
   font-family: var(--font-display);
-  font-size: 4.5rem;
-  padding-top: 0.2rem;
+  font-size: 4.25rem;
+  padding-top: 0.5rem;
+  padding-left: 0.3rem;
 
   @media ${breakpoints.deskLg.width} {
     font-size: 4.75rem;
     padding-top: 0.5rem;
+    padding-left: 0.3rem;
   }
 
   @media ${breakpoints.phoneSm.width} {
