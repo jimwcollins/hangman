@@ -4,7 +4,7 @@
 
 A hangman game built in React with numerous animated elements – including an animated hangman. Phrases to guess are pulled from the Movie DB API.
 
-The hosted site can be found here: < To Come >
+The hosted site can be found here: https://sticksandstones-jc.netlify.app/
 
 &nbsp;
 
